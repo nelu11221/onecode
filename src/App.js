@@ -117,20 +117,27 @@ function ParallaxLayer({ speed = 0.3, className = '', children }) {
   return <div ref={ref} className={className}>{children}</div>;
 }
 
-/* ── Mouse-follow gradient orb ── */
+/* ── Mouse-follow gradient orb (CSS transform, no re-renders) ── */
 function GradientOrb() {
   const ref = useRef(null);
   useEffect(() => {
-    let raf;
+    let ticking = false;
+    let mx = 0, my = 0;
     const onMove = (e) => {
-      raf = requestAnimationFrame(() => {
-        if (!ref.current) return;
-        ref.current.style.left = e.clientX + 'px';
-        ref.current.style.top = e.clientY + 'px';
-      });
+      mx = e.clientX;
+      my = e.clientY;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          if (ref.current) {
+            ref.current.style.transform = `translate3d(${mx - 250}px, ${my - 250}px, 0)`;
+          }
+          ticking = false;
+        });
+      }
     };
     window.addEventListener('mousemove', onMove, { passive: true });
-    return () => { window.removeEventListener('mousemove', onMove); cancelAnimationFrame(raf); };
+    return () => window.removeEventListener('mousemove', onMove);
   }, []);
   return <div ref={ref} className="gradient-orb" />;
 }
@@ -140,7 +147,7 @@ function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const spotlightRef = useRef(null);
 
   /* Navbar scroll */
   useEffect(() => {
@@ -149,13 +156,14 @@ function App() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* Mouse tracking for hero glow */
+  /* Mouse tracking for hero spotlight (ref-based, zero re-renders) */
   const handleMouseMove = useCallback((e) => {
+    if (!spotlightRef.current) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
-    });
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    spotlightRef.current.style.background =
+      `radial-gradient(600px circle at ${x}% ${y}%, rgba(212,90,30,0.12), transparent 60%)`;
   }, []);
 
   /* Slider auto-play */
@@ -200,12 +208,7 @@ function App() {
         <div className="hero__blob hero__blob--3" />
 
         {/* Mouse-follow spotlight */}
-        <div
-          className="hero__spotlight"
-          style={{
-            background: `radial-gradient(600px circle at ${mousePos.x}% ${mousePos.y}%, rgba(212,90,30,0.12), transparent 60%)`,
-          }}
-        />
+        <div ref={spotlightRef} className="hero__spotlight" />
 
         {/* Grid pattern overlay */}
         <div className="hero__grid" />

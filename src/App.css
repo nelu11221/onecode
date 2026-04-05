@@ -137,14 +137,15 @@ button { font-family: var(--sans); }
    ═══════════════════════ */
 .gradient-orb {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 500px;
   height: 500px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(212, 90, 30, 0.06) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
-  transform: translate(-50%, -50%);
-  transition: left 0.3s ease-out, top 0.3s ease-out;
+  will-change: transform;
 }
 
 /* ═══════════════════════
