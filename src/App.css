@@ -38,6 +38,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* AOS fallback — ensure content is never permanently hidden */
+[data-aos] {
+  transition-duration: 800ms !important;
+}
+
+.aos-init:not(.aos-animate) {
+  opacity: 0.01;
+}
+
 body {
   font-family: var(--sans);
   background: var(--bg);
@@ -449,6 +458,19 @@ button {
   padding: var(--section-pad);
   max-width: var(--max-w);
   margin: 0 auto;
+  position: relative;
+}
+
+.showcase::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(212, 90, 30, 0.06) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .showcase__header {
@@ -584,6 +606,18 @@ button {
   padding: var(--section-pad);
   max-width: var(--max-w);
   margin: 0 auto;
+  position: relative;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(212, 90, 30, 0.04) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .about__inner {

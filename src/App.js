@@ -216,7 +216,7 @@ function App() {
 
   /* AOS */
   useEffect(() => {
-    AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic', offset: 80 });
+    AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic', offset: 40, anchorPlacement: 'top-bottom' });
   }, []);
 
   /* Navbar scroll effect */
