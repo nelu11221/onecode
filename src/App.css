@@ -362,13 +362,17 @@ button { font-family: var(--sans); }
   background: var(--accent);
   border-radius: 50%;
   opacity: 0;
-  animation: particleFloat linear infinite;
+  animation:
+    particleMove linear infinite,
+    particleFade ease-in-out infinite;
 }
-@keyframes particleFloat {
-  0% { transform: translateY(0) translateX(0); opacity: 0; }
-  8% { opacity: var(--p-opacity, 0.3); }
-  85% { opacity: var(--p-opacity, 0.3); }
-  100% { transform: translateY(-110vh) translateX(30px); opacity: 0; }
+@keyframes particleMove {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(30px, -110vh, 0); }
+}
+@keyframes particleFade {
+  0%, 100% { opacity: 0; }
+  15%, 85% { opacity: 0.3; }
 }
 
 /* ═══════════════════════

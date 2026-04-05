@@ -144,16 +144,19 @@ function App() {
     <div className="app">
       {/* Floating particles — fixed, always visible */}
       <div className="particles" aria-hidden="true">
-        {[...Array(20)].map((_, i) => (
-          <span key={i} className="particle" style={{
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 8}s`,
-            animationDuration: `${6 + Math.random() * 10}s`,
-            width: `${2 + Math.random() * 3}px`,
-            height: `${2 + Math.random() * 3}px`,
-            '--p-opacity': 0.2 + Math.random() * 0.4,
-          }} />
-        ))}
+        {[...Array(20)].map((_, i) => {
+          const dur = 6 + Math.random() * 10;
+          const del = Math.random() * 8;
+          return (
+            <span key={i} className="particle" style={{
+              left: `${Math.random() * 100}%`,
+              width: `${2 + Math.random() * 3}px`,
+              height: `${2 + Math.random() * 3}px`,
+              animationDuration: `${dur}s, ${dur}s`,
+              animationDelay: `${del}s, ${del}s`,
+            }} />
+          );
+        })}
       </div>
 
       {/* ─── NAVBAR ─── */}
