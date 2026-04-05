@@ -117,30 +117,6 @@ function ParallaxLayer({ speed = 0.3, className = '', children }) {
   return <div ref={ref} className={className}>{children}</div>;
 }
 
-/* ── Mouse-follow gradient orb (CSS transform, no re-renders) ── */
-function GradientOrb() {
-  const ref = useRef(null);
-  useEffect(() => {
-    let ticking = false;
-    let mx = 0, my = 0;
-    const onMove = (e) => {
-      mx = e.clientX;
-      my = e.clientY;
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(() => {
-          if (ref.current) {
-            ref.current.style.transform = `translate3d(${mx - 250}px, ${my - 250}px, 0)`;
-          }
-          ticking = false;
-        });
-      }
-    };
-    window.addEventListener('mousemove', onMove, { passive: true });
-    return () => window.removeEventListener('mousemove', onMove);
-  }, []);
-  return <div ref={ref} className="gradient-orb" />;
-}
 
 /* ══════════ APP ══════════ */
 function App() {
@@ -177,8 +153,16 @@ function App() {
 
   return (
     <div className="app">
-      {/* Mouse-follow orb */}
-      <GradientOrb />
+      {/* Global floating particles */}
+      <div className="particles" aria-hidden="true">
+        {[...Array(30)].map((_, i) => (
+          <span key={i} className="particle" style={{
+            left: `${(i * 3.33) + Math.random() * 3}%`,
+            animationDelay: `${Math.random() * 12}s`,
+            animationDuration: `${8 + Math.random() * 14}s`,
+          }} />
+        ))}
+      </div>
 
       {/* ─── NAVBAR ─── */}
       <nav className={`nav ${navScrolled ? 'nav--scrolled' : ''}`}>
@@ -248,19 +232,6 @@ function App() {
           ))}
         </div>
 
-        {/* Floating particles */}
-        <div className="particles">
-          {[...Array(20)].map((_, i) => (
-            <span key={i} className="particle" style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 8}s`,
-              animationDuration: `${6 + Math.random() * 10}s`,
-              width: `${2 + Math.random() * 3}px`,
-              height: `${2 + Math.random() * 3}px`,
-              opacity: 0.2 + Math.random() * 0.4,
-            }} />
-          ))}
-        </div>
       </section>
 
       {/* ─── MARQUEE ─── */}
