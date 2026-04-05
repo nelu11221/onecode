@@ -142,6 +142,20 @@ function App() {
 
   return (
     <div className="app">
+      {/* Floating particles — fixed, always visible */}
+      <div className="particles" aria-hidden="true">
+        {[...Array(20)].map((_, i) => (
+          <span key={i} className="particle" style={{
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 8}s`,
+            animationDuration: `${6 + Math.random() * 10}s`,
+            width: `${2 + Math.random() * 3}px`,
+            height: `${2 + Math.random() * 3}px`,
+            opacity: 0.2 + Math.random() * 0.4,
+          }} />
+        ))}
+      </div>
+
       {/* ─── NAVBAR ─── */}
       <nav className={`nav ${navScrolled ? 'nav--scrolled' : ''}`}>
         <div className="nav__inner">
@@ -208,19 +222,6 @@ function App() {
           ))}
         </div>
 
-        {/* Floating particles */}
-        <div className="particles" aria-hidden="true">
-          {[...Array(20)].map((_, i) => (
-            <span key={i} className="particle" style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 8}s`,
-              animationDuration: `${6 + Math.random() * 10}s`,
-              width: `${2 + Math.random() * 3}px`,
-              height: `${2 + Math.random() * 3}px`,
-              opacity: 0.2 + Math.random() * 0.4,
-            }} />
-          ))}
-        </div>
       </section>
 
       {/* ─── MARQUEE ─── */}
