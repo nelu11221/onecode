@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   HiArrowRight,
   HiArrowUpRight,
@@ -131,14 +131,6 @@ function App() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* Mouse tracking for hero spotlight (CSS custom props, no layout thrash) */
-  const handleMouseMove = useCallback((e) => {
-    const hero = e.currentTarget;
-    const rect = hero.getBoundingClientRect();
-    hero.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%');
-    hero.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
-  }, []);
-
   /* Slider auto-play */
   useEffect(() => {
     const t = setInterval(() => setCurrentSlide((p) => (p + 1) % sliderData.length), 5000);
@@ -171,14 +163,12 @@ function App() {
       </nav>
 
       {/* ─── HERO ─── */}
-      <section className="hero" id="home" onMouseMove={handleMouseMove}>
+      <section className="hero" id="home">
         {/* Animated floating gradient blobs */}
         <div className="hero__blob hero__blob--1" />
         <div className="hero__blob hero__blob--2" />
         <div className="hero__blob hero__blob--3" />
 
-        {/* Mouse-follow spotlight (uses CSS custom props --mx, --my) */}
-        <div className="hero__spotlight" />
 
         {/* Grid pattern overlay */}
         <div className="hero__grid" />
