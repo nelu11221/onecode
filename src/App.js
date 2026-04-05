@@ -123,7 +123,6 @@ function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
-  const spotlightRef = useRef(null);
 
   /* Navbar scroll */
   useEffect(() => {
@@ -132,14 +131,12 @@ function App() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* Mouse tracking for hero spotlight (ref-based, zero re-renders) */
+  /* Mouse tracking for hero spotlight (CSS custom props, no layout thrash) */
   const handleMouseMove = useCallback((e) => {
-    if (!spotlightRef.current) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    spotlightRef.current.style.background =
-      `radial-gradient(600px circle at ${x}% ${y}%, rgba(212,90,30,0.12), transparent 60%)`;
+    const hero = e.currentTarget;
+    const rect = hero.getBoundingClientRect();
+    hero.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%');
+    hero.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
   }, []);
 
   /* Slider auto-play */
@@ -153,17 +150,6 @@ function App() {
 
   return (
     <div className="app">
-      {/* Global floating particles */}
-      <div className="particles" aria-hidden="true">
-        {[...Array(30)].map((_, i) => (
-          <span key={i} className="particle" style={{
-            left: `${(i * 3.33) + Math.random() * 3}%`,
-            animationDelay: `${Math.random() * 12}s`,
-            animationDuration: `${8 + Math.random() * 14}s`,
-          }} />
-        ))}
-      </div>
-
       {/* ─── NAVBAR ─── */}
       <nav className={`nav ${navScrolled ? 'nav--scrolled' : ''}`}>
         <div className="nav__inner">
@@ -191,8 +177,8 @@ function App() {
         <div className="hero__blob hero__blob--2" />
         <div className="hero__blob hero__blob--3" />
 
-        {/* Mouse-follow spotlight */}
-        <div ref={spotlightRef} className="hero__spotlight" />
+        {/* Mouse-follow spotlight (uses CSS custom props --mx, --my) */}
+        <div className="hero__spotlight" />
 
         {/* Grid pattern overlay */}
         <div className="hero__grid" />
@@ -232,6 +218,19 @@ function App() {
           ))}
         </div>
 
+        {/* Floating particles */}
+        <div className="particles" aria-hidden="true">
+          {[...Array(20)].map((_, i) => (
+            <span key={i} className="particle" style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 8}s`,
+              animationDuration: `${6 + Math.random() * 10}s`,
+              width: `${2 + Math.random() * 3}px`,
+              height: `${2 + Math.random() * 3}px`,
+              opacity: 0.2 + Math.random() * 0.4,
+            }} />
+          ))}
+        </div>
       </section>
 
       {/* ─── MARQUEE ─── */}
