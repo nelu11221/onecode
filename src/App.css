@@ -361,13 +361,14 @@ button { font-family: var(--sans); }
   bottom: -10px;
   background: var(--accent);
   border-radius: 50%;
+  opacity: 0;
   animation: particleFloat linear infinite;
 }
 @keyframes particleFloat {
   0% { transform: translateY(0) translateX(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-100vh) translateX(30px); opacity: 0; }
+  8% { opacity: var(--p-opacity, 0.3); }
+  85% { opacity: var(--p-opacity, 0.3); }
+  100% { transform: translateY(-110vh) translateX(30px); opacity: 0; }
 }
 
 /* ═══════════════════════

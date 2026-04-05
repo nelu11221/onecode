@@ -151,7 +151,7 @@ function App() {
             animationDuration: `${6 + Math.random() * 10}s`,
             width: `${2 + Math.random() * 3}px`,
             height: `${2 + Math.random() * 3}px`,
-            opacity: 0.2 + Math.random() * 0.4,
+            '--p-opacity': 0.2 + Math.random() * 0.4,
           }} />
         ))}
       </div>
