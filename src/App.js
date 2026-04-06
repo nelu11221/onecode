@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import {
   HiArrowRight,
   HiArrowUpRight,
+  HiArrowLeft,
   HiChevronLeft,
   HiChevronRight,
   HiPlus,
@@ -45,13 +46,56 @@ const services = [
   { icon: <FiMonitor />, title: 'Web Applications', description: 'Custom dashboards, SaaS platforms, and interactive tools built with React, Next.js, and modern stacks.', num: '06' },
 ];
 
+const PU = process.env.PUBLIC_URL;
 const portfolio = [
-  { title: 'Nymb', category: 'Landing Page', image: `${process.env.PUBLIC_URL}/project1.jpg`, year: '2025' },
-  { title: 'Dimora del Tramonto', category: 'Landing Page with Booking', image: `${process.env.PUBLIC_URL}/project2.jpg`, year: '2025' },
-  { title: 'Bimmer', category: 'Landing Page', image: `${process.env.PUBLIC_URL}/project3.jpg`, year: '2025' },
-  { title: 'Start', category: 'UI/UX Design', image: `${process.env.PUBLIC_URL}/project4.jpg`, year: '2025' },
-  { title: 'GranStilArt', category: 'Multipage Website', image: `${process.env.PUBLIC_URL}/project5.jpg`, year: '2025' },
-  { title: 'VertragPlus', category: 'Multipage Website', image: `${process.env.PUBLIC_URL}/project6.jpg`, year: '2025' },
+  {
+    title: 'Nymb', category: 'Landing Page', image: `${PU}/project1.jpg`, year: '2025',
+    overview: 'A sleek landing page for Nymb Ecosystem — a tokenization and gamification platform that turns time into real value.',
+    challenge: 'The client needed a single page that could communicate a complex Web3 concept in a way that feels approachable, not intimidating.',
+    solution: 'We crafted a dark, minimal design with animated particles and bold typography, paired with clear CTAs that guide visitors toward the vision and investment pages.',
+    services: ['Landing Page Design', 'Frontend Development', 'Motion Design'],
+    gallery: [`${PU}/project1b.jpg`, `${PU}/project1c.jpg`, `${PU}/project1d.jpg`, `${PU}/project1e.jpg`],
+  },
+  {
+    title: 'Dimora del Tramonto', category: 'Landing Page with Booking', image: `${PU}/project2.jpg`, year: '2025',
+    overview: 'A premium landing page for a private Tuscan villa featuring panoramic Chianti hills views and an integrated booking system.',
+    challenge: 'The villa owner wanted a site that felt as luxurious as the property itself, with a seamless booking experience that eliminated back-and-forth emails.',
+    solution: 'We designed a cinematic hero with rich landscape photography, warm gold tones, and a multi-language interface (EN/IT/DE) with a built-in availability checker and virtual tour.',
+    services: ['Landing Page Design', 'Booking Integration', 'Multi-language Support'],
+    gallery: [`${PU}/project2b.jpg`, `${PU}/project2c.jpg`, `${PU}/project2d.jpg`, `${PU}/project2e.jpg`],
+  },
+  {
+    title: 'Bimmer', category: 'Landing Page', image: `${PU}/project3.jpg`, year: '2025',
+    overview: 'A bold, typography-driven landing page for Bimmer — an automotive service company where every detail counts.',
+    challenge: 'The brand needed a digital presence that matched the precision and quality of their physical service, while standing out in a crowded automotive market.',
+    solution: 'We went with a striking black-and-white palette, oversized Romanian typography, and a structured layout that communicates trust and professionalism at first glance.',
+    services: ['Landing Page Design', 'Brand Identity', 'Frontend Development'],
+    gallery: [`${PU}/project3b.jpg`, `${PU}/project3c.jpg`, `${PU}/project3d.jpg`, `${PU}/project3e.jpg`],
+  },
+  {
+    title: 'Start', category: 'UI/UX Design', image: `${PU}/project4.jpg`, year: '2025',
+    overview: 'A complete UI/UX design for Start — a driving school platform with course management, instructor profiles, and student enrollment.',
+    challenge: 'The driving school had a complex offering — multiple course types, pricing tiers, instructors, and reviews — that needed to be organized into an intuitive multipage experience.',
+    solution: 'We designed a vibrant, energetic interface with orange and blue accents, clear navigation across 10+ pages, star ratings, and a streamlined enrollment flow.',
+    services: ['UI/UX Design', 'Wireframing', 'Prototyping', 'Design System'],
+    gallery: [`${PU}/project4b.jpg`, `${PU}/project4c.jpg`, `${PU}/project4d.jpg`, `${PU}/project4e.jpg`],
+  },
+  {
+    title: 'GranStilArt', category: 'Multipage Website', image: `${PU}/project5.jpg`, year: '2025',
+    overview: 'A full multipage website for GranStilArt — a memorial stone company crafting personalized funeral monuments with care and artistry.',
+    challenge: 'The subject matter required extreme sensitivity. The site needed to feel respectful and elegant while still being functional as a product catalog and lead generation tool.',
+    solution: 'We chose a dark, muted palette with soft lighting photography and subtle animations. The site includes a monument catalog, service pages, blog, and a tasteful contact flow.',
+    services: ['Multipage Website', 'Web Development', 'CMS Integration'],
+    gallery: [],
+  },
+  {
+    title: 'VertragPlus', category: 'Multipage Website', image: `${PU}/project6.jpg`, year: '2025',
+    overview: 'A professional multipage website for VertragPlus — a legal-tech platform streamlining contract management for businesses.',
+    challenge: 'The client needed a website that conveyed trust, security, and simplicity — key qualities for a platform handling legal documents.',
+    solution: 'We built a clean, structured website with a professional color scheme, clear information hierarchy, and intuitive navigation across multiple service and feature pages.',
+    services: ['Multipage Website', 'Web Development', 'UI/UX Design'],
+    gallery: [],
+  },
 ];
 
 const testimonials = [
@@ -148,12 +192,94 @@ function FaqItem({ question, answer, isOpen, onClick, index }) {
   );
 }
 
+/* ── Case Study overlay ── */
+function CaseStudy({ project, onClose }) {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  return (
+    <div className="case" onClick={onClose}>
+      <div className="case__inner" onClick={(e) => e.stopPropagation()}>
+        <button className="case__close" onClick={onClose} aria-label="Close">
+          <FiX />
+        </button>
+
+        <div className="case__hero">
+          <img src={project.image} alt={project.title} className="case__hero-img" />
+          <div className="case__hero-overlay" />
+          <div className="case__hero-content">
+            <span className="case__tag">{project.category}</span>
+            <h1 className="case__title">{project.title}</h1>
+            <span className="case__year">{project.year}</span>
+          </div>
+        </div>
+
+        <div className="case__body">
+          <div className="case__section">
+            <h2 className="case__heading">Overview</h2>
+            <p className="case__text">{project.overview}</p>
+          </div>
+
+          <div className="case__two-col">
+            <div className="case__section">
+              <h2 className="case__heading">Challenge</h2>
+              <p className="case__text">{project.challenge}</p>
+            </div>
+            <div className="case__section">
+              <h2 className="case__heading">Solution</h2>
+              <p className="case__text">{project.solution}</p>
+            </div>
+          </div>
+
+          <div className="case__section">
+            <h2 className="case__heading">Services Provided</h2>
+            <div className="case__services">
+              {project.services.map((s) => (
+                <span key={s} className="case__service-tag">{s}</span>
+              ))}
+            </div>
+          </div>
+
+          {project.gallery.length > 0 && (
+            <div className="case__section">
+              <h2 className="case__heading">Gallery</h2>
+              <div className="case__gallery">
+                {project.gallery.map((img, i) => (
+                  <img key={i} src={img} alt={`${project.title} screenshot ${i + 1}`} className="case__gallery-img" />
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="case__footer">
+            <button className="btn btn--ghost" onClick={onClose}>
+              <HiArrowLeft /> Back to Portfolio
+            </button>
+            <a href="#contact" className="btn btn--primary" onClick={onClose}>
+              <span>Start a Similar Project</span> <HiArrowRight />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ══════════ APP ══════════ */
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
+  const [activeCase, setActiveCase] = useState(null);
 
   /* Navbar scroll */
   useEffect(() => {
@@ -382,8 +508,13 @@ function App() {
         <div className="portfolio__grid">
           {portfolio.map((p, i) => (
             <Reveal delay={i * 80} key={i}>
-              <div className="port-card">
-                <div className="port-card__img"><img src={p.image} alt={p.title} /></div>
+              <div className="port-card" onClick={() => setActiveCase(p)} role="button" tabIndex={0}>
+                <div className="port-card__img">
+                  <img src={p.image} alt={p.title} />
+                  <div className="port-card__overlay">
+                    <span className="port-card__view">View Case Study <HiArrowUpRight /></span>
+                  </div>
+                </div>
                 <div className="port-card__info">
                   <div>
                     <h3 className="port-card__title">{p.title}</h3>
@@ -529,6 +660,11 @@ function App() {
           <div className="footer__bottom-links"><a href="#!">Privacy</a><a href="#!">Terms</a></div>
         </div>
       </footer>
+
+      {/* ─── CASE STUDY OVERLAY ─── */}
+      {activeCase && (
+        <CaseStudy project={activeCase} onClose={() => setActiveCase(null)} />
+      )}
     </div>
   );
 }
