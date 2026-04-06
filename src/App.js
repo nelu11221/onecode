@@ -94,7 +94,7 @@ const portfolio = [
     challenge: 'VertragPlus needed a website that could showcase a large and diverse product catalog in a way that felt organized, trustworthy, and easy to navigate for B2B buyers.',
     solution: 'We designed a clean, product-focused website with structured category pages, detailed product listings, and clear calls to action — making it easy for buyers to find the right packaging solution and get in touch.',
     services: ['Multipage Website', 'Web Development', 'UI/UX Design'],
-    gallery: [],
+    gallery: [`${PU}/project6b.jpg`, `${PU}/project6c.jpg`, `${PU}/project6d.jpg`, `${PU}/project6e.jpg`],
   },
 ];
 
