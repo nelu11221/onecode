@@ -6,12 +6,12 @@ import {
   HiChevronRight,
 } from 'react-icons/hi2';
 import {
-  FiCode,
-  FiSmartphone,
-  FiCloud,
-  FiShield,
-  FiZap,
+  FiLayout,
   FiLayers,
+  FiGrid,
+  FiPenTool,
+  FiImage,
+  FiMonitor,
   FiGithub,
   FiTwitter,
   FiLinkedin,
@@ -27,41 +27,41 @@ import './App.css';
 
 /* ── Data ── */
 const sliderData = [
-  { id: 1, title: 'Web Development', tag: 'Development', description: 'We build high-performance web applications with modern frameworks that scale with your business.', image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80' },
-  { id: 2, title: 'Mobile Applications', tag: 'Mobile', description: 'Native and cross-platform apps designed for seamless user experiences on every device.', image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&q=80' },
-  { id: 3, title: 'Interface Design', tag: 'Design', description: 'Intuitive, research-driven interfaces that delight users and drive measurable results.', image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=80' },
-  { id: 4, title: 'Cloud Infrastructure', tag: 'DevOps', description: 'Scalable, resilient cloud architecture that keeps your products fast and always available.', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80' },
+  { id: 1, title: 'Landing Pages', tag: 'Web Design', description: 'High-converting landing pages that capture attention, communicate your value, and turn visitors into customers.', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80' },
+  { id: 2, title: 'Multipage Websites', tag: 'Development', description: 'Fully custom websites with multiple pages, smooth navigation, and a cohesive design that tells your brand story.', image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80' },
+  { id: 3, title: 'UI/UX Design', tag: 'Design', description: 'User-centered interfaces designed through research, prototyping, and testing to deliver intuitive experiences.', image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=80' },
+  { id: 4, title: 'Web Applications', tag: 'Apps', description: 'Custom web apps built with modern frameworks — dashboards, platforms, and tools tailored to your business.', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80' },
 ];
 
 const services = [
-  { icon: <FiCode />, title: 'Frontend Engineering', description: 'Pixel-perfect interfaces built with React, Next.js, and Vue that perform at scale.', num: '01' },
-  { icon: <FiLayers />, title: 'Backend Architecture', description: 'Robust API design, microservices, and database architecture built for growth.', num: '02' },
-  { icon: <FiSmartphone />, title: 'Mobile Development', description: 'iOS and Android applications with fluid animations and native performance.', num: '03' },
-  { icon: <FiCloud />, title: 'Cloud & DevOps', description: 'CI/CD pipelines, containerization, and infrastructure-as-code on AWS and GCP.', num: '04' },
-  { icon: <FiShield />, title: 'Cybersecurity', description: 'Penetration testing, threat modeling, and secure-by-design engineering.', num: '05' },
-  { icon: <FiZap />, title: 'Performance', description: 'Core Web Vitals optimization, caching strategies, and real-time monitoring.', num: '06' },
+  { icon: <FiLayout />, title: 'Landing Pages', description: 'One-page websites designed to convert. Perfect for product launches, campaigns, and lead generation.', num: '01' },
+  { icon: <FiLayers />, title: 'Multipage Websites', description: 'Complete websites with custom layouts, responsive design, and CMS integration for full control.', num: '02' },
+  { icon: <FiGrid />, title: 'Web Portfolios', description: 'Stunning portfolio sites that showcase your work with smooth animations and a lasting impression.', num: '03' },
+  { icon: <FiPenTool />, title: 'UI/UX Design', description: 'Research-driven design from wireframes to high-fidelity prototypes, focused on usability and beauty.', num: '04' },
+  { icon: <FiImage />, title: 'Graphic Design', description: 'Brand identities, social media assets, marketing materials, and visual content that stands out.', num: '05' },
+  { icon: <FiMonitor />, title: 'Web Applications', description: 'Custom dashboards, SaaS platforms, and interactive tools built with React, Next.js, and modern stacks.', num: '06' },
 ];
 
 const portfolio = [
-  { title: 'FinTrack', category: 'Web Application', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80', year: '2026' },
-  { title: 'MediCare', category: 'Mobile App', image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80', year: '2025' },
-  { title: 'ShopEase', category: 'E-Commerce Platform', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', year: '2025' },
-  { title: 'EduLearn', category: 'SaaS Platform', image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80', year: '2026' },
-  { title: 'GreenGrid', category: 'IoT Dashboard', image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80', year: '2024' },
-  { title: 'TravelMate', category: 'Mobile App', image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80', year: '2025' },
+  { title: 'Luxe Realty', category: 'Landing Page', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80', year: '2026' },
+  { title: 'Moda Studio', category: 'Web Portfolio', image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80', year: '2025' },
+  { title: 'NovaBrew', category: 'Multipage Website', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', year: '2025' },
+  { title: 'Zenith Health', category: 'UI/UX Design', image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80', year: '2026' },
+  { title: 'EcoTrack', category: 'Web Application', image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80', year: '2024' },
+  { title: 'Atlas Ventures', category: 'Graphic Design', image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80', year: '2025' },
 ];
 
 const testimonials = [
-  { name: 'Sarah Johnson', role: 'CEO, FinTrack', text: "OneCode turned our rough prototype into a product that investors fight over. Their team operates at a level I haven't seen elsewhere.", avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80' },
-  { name: 'David Chen', role: 'CTO, MediCare', text: "Technical excellence combined with genuine care for the product. They didn't just build what we asked — they built what we needed.", avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80' },
-  { name: 'Emily Rodriguez', role: 'Founder, ShopEase', text: 'Working with OneCode felt like having a world-class engineering team in-house. The ROI was immediate and measurable.', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80' },
+  { name: 'Sarah Johnson', role: 'Founder, Luxe Realty', text: "OneCode built us a landing page that doubled our lead conversion overnight. The design is sleek, fast, and exactly what we envisioned.", avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80' },
+  { name: 'David Chen', role: 'Creative Director, Moda Studio', text: "They designed a portfolio site that actually feels like art. Every detail was considered — it's the best investment we've made.", avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80' },
+  { name: 'Emily Rodriguez', role: 'CEO, NovaBrew', text: "From the brand identity to the full website, OneCode delivered a cohesive digital presence that elevated our entire business.", avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80' },
 ];
 
 const team = [
-  { name: 'Alex Morgan', role: 'Lead Engineer', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80' },
-  { name: 'Priya Sharma', role: 'Design Director', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80' },
-  { name: 'James Wilson', role: 'Backend Architect', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80' },
-  { name: 'Lisa Park', role: 'Project Lead', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80' },
+  { name: 'Alex Morgan', role: 'Web Developer', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80' },
+  { name: 'Priya Sharma', role: 'UI/UX Designer', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80' },
+  { name: 'James Wilson', role: 'Graphic Designer', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80' },
+  { name: 'Lisa Park', role: 'Project Manager', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80' },
 ];
 
 /* ── Custom scroll-reveal hook ── */
@@ -192,21 +192,21 @@ function App() {
 
         <ParallaxLayer speed={-0.15} className="hero__content-wrap">
           <div className="hero__content">
-            <p className="hero__tag anim-hero anim-hero--1">Digital Studio</p>
+            <p className="hero__tag anim-hero anim-hero--1">Web Design & Development Studio</p>
             <h1 className="hero__title anim-hero anim-hero--2">
-              We turn ideas into{' '}
-              <em className="hero__italic">digital</em>{' '}
-              experiences
+              We design websites that{' '}
+              <em className="hero__italic">convert</em>{' '}
+              and inspire
             </h1>
             <p className="hero__sub anim-hero anim-hero--3">
-              A collective of engineers, designers and strategists crafting
-              software that moves industries forward.
+              Landing pages, portfolios, multipage websites, and custom web apps &mdash;
+              crafted with precision to grow your brand online.
             </p>
             <div className="hero__actions anim-hero anim-hero--4">
               <a href="#work" className="btn btn--primary">
-                <span>View Our Work</span> <HiArrowRight />
+                <span>See Our Work</span> <HiArrowRight />
               </a>
-              <a href="#about" className="btn btn--ghost">How We Work</a>
+              <a href="#services" className="btn btn--ghost">Our Services</a>
             </div>
           </div>
         </ParallaxLayer>
@@ -232,9 +232,9 @@ function App() {
         <div className="marquee__track">
           {[...Array(4)].map((_, i) => (
             <span key={i} className="marquee__content">
-              Web Development &nbsp;&bull;&nbsp; Mobile Apps &nbsp;&bull;&nbsp;
-              UI/UX Design &nbsp;&bull;&nbsp; Cloud Solutions &nbsp;&bull;&nbsp;
-              Strategy &nbsp;&bull;&nbsp; Branding &nbsp;&bull;&nbsp;
+              Landing Pages &nbsp;&bull;&nbsp; Multipage Websites &nbsp;&bull;&nbsp;
+              Web Portfolios &nbsp;&bull;&nbsp; UI/UX Design &nbsp;&bull;&nbsp;
+              Graphic Design &nbsp;&bull;&nbsp; Web Applications &nbsp;&bull;&nbsp;
             </span>
           ))}
         </div>
@@ -281,21 +281,22 @@ function App() {
             <Reveal><p className="label">About Us</p></Reveal>
             <Reveal delay={100}>
               <h2 className="heading-2">
-                We believe great software starts with understanding <em>people</em>
+                We design with purpose and build with <em>precision</em>
               </h2>
             </Reveal>
           </div>
           <div className="about__right">
             <Reveal delay={150}>
               <p className="body-text body-text--lg">
-                OneCode is a collective of engineers, designers and strategists
-                who don't just write code &mdash; we solve problems, build
-                relationships, and deliver products that matter.
+                OneCode is a web design and development studio that helps businesses
+                stand out online. From single landing pages to full multipage websites,
+                we combine clean UI/UX design with solid development to deliver
+                digital products that look great and perform even better.
               </p>
             </Reveal>
             <Reveal delay={200}>
               <div className="about__features">
-                {['Agile-first methodology', 'Transparent communication', 'End-to-end ownership', 'Post-launch support'].map((f) => (
+                {['Pixel-perfect design', 'Mobile-first development', 'Fast turnaround times', 'Ongoing support & revisions'].map((f) => (
                   <div className="about__feat" key={f}>
                     <span className="about__check" /><span>{f}</span>
                   </div>
@@ -303,7 +304,7 @@ function App() {
               </div>
             </Reveal>
             <Reveal delay={250}>
-              <a href="#services" className="btn btn--primary"><span>Our Process</span> <HiArrowRight /></a>
+              <a href="#services" className="btn btn--primary"><span>See Our Services</span> <HiArrowRight /></a>
             </Reveal>
           </div>
         </div>
@@ -320,8 +321,8 @@ function App() {
       <section className="services" id="services">
         <div className="section-glow section-glow--center" />
         <div className="services__header">
-          <Reveal><p className="label">What We Do</p></Reveal>
-          <Reveal delay={100}><h2 className="heading-2">Services built for <em>scale</em></h2></Reveal>
+          <Reveal><p className="label">Our Services</p></Reveal>
+          <Reveal delay={100}><h2 className="heading-2">Everything you need to go <em>live</em></h2></Reveal>
         </div>
         <div className="services__grid">
           {services.map((s, i) => (
@@ -370,7 +371,7 @@ function App() {
         <div className="section-glow section-glow--right" />
         <div className="testimonials__header">
           <Reveal><p className="label">Testimonials</p></Reveal>
-          <Reveal delay={100}><h2 className="heading-2">Trusted by <em>industry</em> leaders</h2></Reveal>
+          <Reveal delay={100}><h2 className="heading-2">What our <em>clients</em> say</h2></Reveal>
         </div>
         <div className="testimonials__list">
           {testimonials.map((t, i) => (
@@ -415,10 +416,10 @@ function App() {
         <div className="contact__inner">
           <div className="contact__left">
             <Reveal><p className="label">Get In Touch</p></Reveal>
-            <Reveal delay={100}><h2 className="heading-2">Let's build something <em>remarkable</em></h2></Reveal>
+            <Reveal delay={100}><h2 className="heading-2">Let's bring your vision <em>online</em></h2></Reveal>
             <Reveal delay={150}>
               <p className="body-text body-text--lg">
-                Have a project in mind? We'd love to hear about it. Drop us a line and let's start a conversation.
+                Need a landing page, a full website, or a custom web app? Tell us about your project and we'll get back to you within 24 hours.
               </p>
             </Reveal>
             <Reveal delay={200}>
@@ -435,10 +436,12 @@ function App() {
               <input type="email" placeholder="Email" className="form-field" />
               <select className="form-field form-select">
                 <option value="">Select a service</option>
-                <option>Web Development</option>
-                <option>Mobile App</option>
+                <option>Landing Page</option>
+                <option>Multipage Website</option>
+                <option>Web Portfolio</option>
                 <option>UI/UX Design</option>
-                <option>Cloud & DevOps</option>
+                <option>Graphic Design</option>
+                <option>Web Application</option>
                 <option>Other</option>
               </select>
               <textarea placeholder="Tell us about your project..." className="form-field form-textarea" rows="5" />
@@ -453,7 +456,7 @@ function App() {
         <div className="footer__top">
           <div className="footer__brand">
             <a href="#home" className="nav__logo">One<span>Code</span></a>
-            <p className="footer__tagline">Crafting digital solutions that drive real-world results.</p>
+            <p className="footer__tagline">Web design & development studio crafting digital experiences that convert.</p>
             <div className="footer__socials">
               <a href="#!" aria-label="LinkedIn"><FiLinkedin /></a>
               <a href="#!" aria-label="Twitter"><FiTwitter /></a>
@@ -462,7 +465,7 @@ function App() {
             </div>
           </div>
           <div className="footer__col"><h4>Company</h4><a href="#about">About</a><a href="#work">Work</a><a href="#!">Careers</a><a href="#contact">Contact</a></div>
-          <div className="footer__col"><h4>Services</h4><a href="#!">Web Development</a><a href="#!">Mobile Apps</a><a href="#!">UI/UX Design</a><a href="#!">Cloud Solutions</a></div>
+          <div className="footer__col"><h4>Services</h4><a href="#!">Landing Pages</a><a href="#!">Multipage Websites</a><a href="#!">Web Portfolios</a><a href="#!">UI/UX Design</a></div>
           <div className="footer__col"><h4>Resources</h4><a href="#!">Blog</a><a href="#!">Case Studies</a><a href="#!">Documentation</a><a href="#!">Support</a></div>
         </div>
         <div className="footer__bottom">
