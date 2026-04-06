@@ -30,10 +30,10 @@ import './App.css';
 
 /* ── Data ── */
 const sliderData = [
-  { id: 1, title: 'Landing Pages', tag: 'Web Design', description: 'High-converting landing pages that capture attention, communicate your value, and turn visitors into customers.', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80' },
-  { id: 2, title: 'Multipage Websites', tag: 'Development', description: 'Fully custom websites with multiple pages, smooth navigation, and a cohesive design that tells your brand story.', image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80' },
-  { id: 3, title: 'UI/UX Design', tag: 'Design', description: 'User-centered interfaces designed through research, prototyping, and testing to deliver intuitive experiences.', image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=80' },
-  { id: 4, title: 'Web Applications', tag: 'Apps', description: 'Custom web apps built with modern frameworks — dashboards, platforms, and tools tailored to your business.', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80' },
+  { id: 1, title: 'Landing Pages', tag: 'Web Design', description: 'High-converting landing pages that capture attention, communicate your value, and turn visitors into customers.', image: `${process.env.PUBLIC_URL}/project1.jpg` },
+  { id: 2, title: 'Multipage Websites', tag: 'Development', description: 'Fully custom websites with multiple pages, smooth navigation, and a cohesive design that tells your brand story.', image: `${process.env.PUBLIC_URL}/project5.jpg` },
+  { id: 3, title: 'UI/UX Design', tag: 'Design', description: 'User-centered interfaces designed through research, prototyping, and testing to deliver intuitive experiences.', image: `${process.env.PUBLIC_URL}/project4.jpg` },
+  { id: 4, title: 'Web Applications', tag: 'Apps', description: 'Custom web apps built with modern frameworks — dashboards, platforms, and tools tailored to your business.', image: `${process.env.PUBLIC_URL}/project6.jpg` },
 ];
 
 const services = [
@@ -46,12 +46,12 @@ const services = [
 ];
 
 const portfolio = [
-  { title: 'Luxe Realty', category: 'Landing Page', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80', year: '2026' },
-  { title: 'Moda Studio', category: 'Web Portfolio', image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80', year: '2025' },
-  { title: 'NovaBrew', category: 'Multipage Website', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', year: '2025' },
-  { title: 'Zenith Health', category: 'UI/UX Design', image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80', year: '2026' },
-  { title: 'EcoTrack', category: 'Web Application', image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80', year: '2024' },
-  { title: 'Atlas Ventures', category: 'Graphic Design', image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80', year: '2025' },
+  { title: 'Nymb', category: 'Landing Page', image: `${process.env.PUBLIC_URL}/project1.jpg`, year: '2025' },
+  { title: 'Dimora del Tramonto', category: 'Landing Page with Booking', image: `${process.env.PUBLIC_URL}/project2.jpg`, year: '2025' },
+  { title: 'Bimmer', category: 'Landing Page', image: `${process.env.PUBLIC_URL}/project3.jpg`, year: '2025' },
+  { title: 'Start', category: 'UI/UX Design', image: `${process.env.PUBLIC_URL}/project4.jpg`, year: '2025' },
+  { title: 'GranStilArt', category: 'Multipage Website', image: `${process.env.PUBLIC_URL}/project5.jpg`, year: '2025' },
+  { title: 'VertragPlus', category: 'Multipage Website', image: `${process.env.PUBLIC_URL}/project6.jpg`, year: '2025' },
 ];
 
 const testimonials = [
