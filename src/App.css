@@ -807,6 +807,7 @@ button { font-family: var(--sans); }
 
 .case__body {
   padding: 60px 48px 80px;
+  background: var(--bg); position: relative; z-index: 1;
 }
 .case__section {
   margin-bottom: 56px;

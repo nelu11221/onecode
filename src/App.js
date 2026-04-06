@@ -90,9 +90,9 @@ const portfolio = [
   },
   {
     title: 'VertragPlus', category: 'Multipage Website', image: `${PU}/project6.jpg`, year: '2025',
-    overview: 'A professional multipage website for VertragPlus — a legal-tech platform streamlining contract management for businesses.',
-    challenge: 'The client needed a website that conveyed trust, security, and simplicity — key qualities for a platform handling legal documents.',
-    solution: 'We built a clean, structured website with a professional color scheme, clear information hierarchy, and intuitive navigation across multiple service and feature pages.',
+    overview: 'A full multipage website for VertragPlus — a food packaging company offering a wide range of packaging solutions for the food industry.',
+    challenge: 'VertragPlus needed a website that could showcase a large and diverse product catalog in a way that felt organized, trustworthy, and easy to navigate for B2B buyers.',
+    solution: 'We designed a clean, product-focused website with structured category pages, detailed product listings, and clear calls to action — making it easy for buyers to find the right packaging solution and get in touch.',
     services: ['Multipage Website', 'Web Development', 'UI/UX Design'],
     gallery: [],
   },
