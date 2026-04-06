@@ -183,8 +183,8 @@ button { font-family: var(--sans); }
   padding: 0 clamp(20px, 5vw, 60px); height: 72px;
   display: flex; align-items: center; justify-content: space-between;
 }
-.nav__logo { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; color: var(--white); }
-.nav__logo span { color: var(--accent); }
+.nav__logo { display: flex; align-items: center; }
+.nav__logo-img { height: 32px; width: auto; display: block; }
 .nav__links { list-style: none; display: flex; gap: 36px; }
 .nav__links a {
   font-size: 0.88rem; font-weight: 500; color: var(--gray-300);

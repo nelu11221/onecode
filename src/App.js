@@ -23,6 +23,7 @@ import {
   FiMapPin,
   FiPhone,
 } from 'react-icons/fi';
+import logoWhite from './logo_white.svg';
 import './App.css';
 
 /* ── Data ── */
@@ -162,7 +163,7 @@ function App() {
       {/* ─── NAVBAR ─── */}
       <nav className={`nav ${navScrolled ? 'nav--scrolled' : ''}`}>
         <div className="nav__inner">
-          <a href="#home" className="nav__logo">One<span>Code</span></a>
+          <a href="#home" className="nav__logo"><img src={logoWhite} alt="OneCode" className="nav__logo-img" /></a>
           <ul className={`nav__links ${menuOpen ? 'open' : ''}`}>
             <li><a href="#home" onClick={() => setMenuOpen(false)}>Home</a></li>
             <li><a href="#work" onClick={() => setMenuOpen(false)}>Work</a></li>
@@ -455,7 +456,7 @@ function App() {
       <footer className="footer">
         <div className="footer__top">
           <div className="footer__brand">
-            <a href="#home" className="nav__logo">One<span>Code</span></a>
+            <a href="#home" className="nav__logo"><img src={logoWhite} alt="OneCode" className="nav__logo-img" /></a>
             <p className="footer__tagline">Web design & development studio crafting digital experiences that convert.</p>
             <div className="footer__socials">
               <a href="#!" aria-label="LinkedIn"><FiLinkedin /></a>
