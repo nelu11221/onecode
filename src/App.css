@@ -503,11 +503,12 @@ button { font-family: var(--sans); }
 .services__grid {
   max-width: var(--max-w); margin: 0 auto;
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: rgba(255,255,255,0.04);
+  gap: 1px; background: var(--gray-800);
+  border: 1px solid var(--gray-800);
   border-radius: var(--radius-lg); overflow: hidden;
 }
 .service-card {
-  background: var(--bg-raised); padding: 40px 32px;
+  background: var(--bg); padding: 40px 32px;
   position: relative; cursor: pointer;
   transition: background 0.4s var(--ease);
 }
@@ -609,8 +610,8 @@ button { font-family: var(--sans); }
   transition: background 0.3s var(--ease);
 }
 .faq-item:last-child { border-bottom: 1px solid var(--gray-800); }
-.faq-item:hover { background: rgba(255,255,255,0.02); }
-.faq-item--open { background: rgba(212,90,30,0.04); }
+.faq-item:hover { background: rgba(255,255,255,0.015); }
+.faq-item--open { background: rgba(255,255,255,0.02); }
 
 .faq-item__header {
   display: flex; align-items: center; gap: 20px;
