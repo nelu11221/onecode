@@ -4,6 +4,8 @@ import {
   HiArrowUpRight,
   HiChevronLeft,
   HiChevronRight,
+  HiPlus,
+  HiMinus,
 } from 'react-icons/hi2';
 import {
   FiLayout,
@@ -65,6 +67,15 @@ const team = [
   { name: 'Lisa Park', role: 'Project Manager', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80' },
 ];
 
+const faqs = [
+  { question: 'How long does a typical project take?', answer: 'It depends on scope — a landing page can be done in 3–7 days, while a full product design + dev build typically takes 1–3 weeks. I give you a precise timeline after our discovery call, and I stick to it.' },
+  { question: 'Do you work with clients outside of Europe?', answer: 'Absolutely. I work async-first with clients across North America, the Middle East, and Southeast Asia. Time zones have never been a blocker — clear communication and good tooling make it seamless.' },
+  { question: 'What do you need from me to get started?', answer: 'A brief (or even just a rough idea), your brand assets if you have them, and a 30-minute kickoff call. I handle the rest — research, structure, design, and code.' },
+  { question: 'Do you offer ongoing support after launch?', answer: 'Yes. Every project includes 30 days of post-launch support at no extra cost. After that, I offer monthly retainer packages for clients who need continuous updates, new features, or A/B testing.' },
+  { question: 'Can you redesign an existing website without breaking it?', answer: 'That is one of my specialties. I audit your current site first — performance, UX, conversion gaps — then redesign and rebuild iteratively so the transition is smooth and your SEO is protected.' },
+  { question: 'What is your pricing like?', answer: 'Projects are quoted fixed-price based on scope, so you always know the total upfront — no surprise invoices. Landing pages start around €300, full websites from €550. Book a call and I will send a detailed quote within 24 hours.' },
+];
+
 /* ── Custom scroll-reveal hook ── */
 function useReveal() {
   const ref = useRef(null);
@@ -119,11 +130,30 @@ function ParallaxLayer({ speed = 0.3, className = '', children }) {
 }
 
 
+/* ── FAQ Accordion Item ── */
+function FaqItem({ question, answer, isOpen, onClick, index }) {
+  const contentRef = useRef(null);
+  return (
+    <div className={`faq-item ${isOpen ? 'faq-item--open' : ''}`} onClick={onClick}>
+      <div className="faq-item__header">
+        <span className="faq-item__num">{String(index + 1).padStart(2, '0')}</span>
+        <h3 className="faq-item__question">{question}</h3>
+        <span className="faq-item__icon">{isOpen ? <HiMinus /> : <HiPlus />}</span>
+      </div>
+      <div className="faq-item__body" ref={contentRef}
+        style={{ maxHeight: isOpen ? contentRef.current?.scrollHeight + 'px' : '0px' }}>
+        <p className="faq-item__answer">{answer}</p>
+      </div>
+    </div>
+  );
+}
+
 /* ══════════ APP ══════════ */
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
 
   /* Navbar scroll */
   useEffect(() => {
@@ -389,6 +419,31 @@ function App() {
               </div>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* ─── FAQ ─── */}
+      <section className="faq" id="faq">
+        <div className="section-glow section-glow--center" />
+        <div className="faq__inner">
+          <div className="faq__header">
+            <Reveal><p className="label">FAQ</p></Reveal>
+            <Reveal delay={100}><h2 className="heading-2">Frequently asked <em>questions</em></h2></Reveal>
+            <Reveal delay={150}><p className="body-text body-text--lg faq__subtitle">Everything you need to know before we start working together.</p></Reveal>
+          </div>
+          <div className="faq__list">
+            {faqs.map((faq, i) => (
+              <Reveal delay={i * 80} key={i}>
+                <FaqItem
+                  question={faq.question}
+                  answer={faq.answer}
+                  index={i}
+                  isOpen={openFaq === i}
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
