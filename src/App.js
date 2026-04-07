@@ -26,6 +26,7 @@ import {
   FiMapPin,
   FiPhone,
 } from 'react-icons/fi';
+import emailjs from '@emailjs/browser';
 import logoWhite from './logo_white.svg';
 import './App.css';
 
@@ -280,6 +281,8 @@ function App() {
   const [navScrolled, setNavScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   const [activeCase, setActiveCase] = useState(null);
+  const [formStatus, setFormStatus] = useState('idle'); // idle | sending | sent | error
+  const formRef = useRef(null);
 
   /* Navbar scroll */
   useEffect(() => {
@@ -296,6 +299,21 @@ function App() {
 
   const prev = () => setCurrentSlide((p) => (p - 1 + sliderData.length) % sliderData.length);
   const next = () => setCurrentSlide((p) => (p + 1) % sliderData.length);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormStatus('sending');
+    emailjs.sendForm('service_tjrtu2j', 'template_op0wa7q', formRef.current, 'dzh_MYVldtKHUDQQG')
+      .then(() => {
+        setFormStatus('sent');
+        formRef.current.reset();
+        setTimeout(() => setFormStatus('idle'), 5000);
+      })
+      .catch(() => {
+        setFormStatus('error');
+        setTimeout(() => setFormStatus('idle'), 5000);
+      });
+  };
 
   return (
     <div className="app">
@@ -618,10 +636,10 @@ function App() {
             </Reveal>
           </div>
           <Reveal delay={150} className="contact__right">
-            <form className="contact__form" onSubmit={(e) => e.preventDefault()}>
-              <input type="text" placeholder="Name" className="form-field" />
-              <input type="email" placeholder="Email" className="form-field" />
-              <select className="form-field form-select">
+            <form className="contact__form" ref={formRef} onSubmit={handleSubmit}>
+              <input type="text" name="from_name" placeholder="Name" className="form-field" required />
+              <input type="email" name="from_email" placeholder="Email" className="form-field" required />
+              <select name="service" className="form-field form-select" required>
                 <option value="">Select a service</option>
                 <option>Landing Page</option>
                 <option>Multipage Website</option>
@@ -631,8 +649,17 @@ function App() {
                 <option>Web Application</option>
                 <option>Other</option>
               </select>
-              <textarea placeholder="Tell us about your project..." className="form-field form-textarea" rows="5" />
-              <button type="submit" className="btn btn--primary btn--full"><span>Send Message</span> <HiArrowRight /></button>
+              <textarea name="message" placeholder="Tell us about your project..." className="form-field form-textarea" rows="5" required />
+              <input type="hidden" name="time" value={new Date().toLocaleString()} />
+              <button type="submit" className={`btn btn--primary btn--full ${formStatus === 'sent' ? 'btn--success' : ''} ${formStatus === 'error' ? 'btn--error' : ''}`} disabled={formStatus === 'sending'}>
+                <span>
+                  {formStatus === 'idle' && 'Send Message'}
+                  {formStatus === 'sending' && 'Sending...'}
+                  {formStatus === 'sent' && 'Message Sent!'}
+                  {formStatus === 'error' && 'Failed — Try Again'}
+                </span>
+                {formStatus === 'idle' && <HiArrowRight />}
+              </button>
             </form>
           </Reveal>
         </div>
