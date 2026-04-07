@@ -610,8 +610,8 @@ button { font-family: var(--sans); }
   transition: background 0.3s var(--ease);
 }
 .faq-item:last-child { border-bottom: 1px solid var(--gray-800); }
-.faq-item:hover { background: rgba(255,255,255,0.015); }
-.faq-item--open { background: rgba(255,255,255,0.02); }
+.faq-item:hover { }
+.faq-item--open { }
 
 .faq-item__header {
   display: flex; align-items: center; gap: 20px;
