@@ -452,6 +452,36 @@ function App() {
         </div>
       </section>
 
+      {/* ─── PORTFOLIO ─── */}
+      <section className="portfolio">
+        <div className="section-glow section-glow--left" />
+        <div className="portfolio__header">
+          <Reveal><p className="label">Portfolio</p></Reveal>
+          <Reveal delay={100}><h2 className="heading-2">Recent <em>work</em></h2></Reveal>
+        </div>
+        <div className="portfolio__grid">
+          {portfolio.map((p, i) => (
+            <Reveal delay={i * 80} key={i}>
+              <div className="port-card" onClick={() => setActiveCase(p)} role="button" tabIndex={0}>
+                <div className="port-card__img">
+                  <img src={p.image} alt={p.title} />
+                  <div className="port-card__overlay">
+                    <span className="port-card__view">View Case Study <HiArrowUpRight /></span>
+                  </div>
+                </div>
+                <div className="port-card__info">
+                  <div>
+                    <h3 className="port-card__title">{p.title}</h3>
+                    <span className="port-card__cat">{p.category}</span>
+                  </div>
+                  <span className="port-card__year">{p.year}</span>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* ─── ABOUT ─── */}
       <section className="about" id="about">
         <div className="section-glow section-glow--right" />
@@ -559,36 +589,6 @@ function App() {
                 <h3 className="service-card__title">{s.title}</h3>
                 <p className="service-card__desc">{s.description}</p>
                 <span className="service-card__arrow"><HiArrowUpRight /></span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── PORTFOLIO ─── */}
-      <section className="portfolio">
-        <div className="section-glow section-glow--left" />
-        <div className="portfolio__header">
-          <Reveal><p className="label">Recent Work</p></Reveal>
-          <Reveal delay={100}><h2 className="heading-2">Selected <em>projects</em></h2></Reveal>
-        </div>
-        <div className="portfolio__grid">
-          {portfolio.map((p, i) => (
-            <Reveal delay={i * 80} key={i}>
-              <div className="port-card" onClick={() => setActiveCase(p)} role="button" tabIndex={0}>
-                <div className="port-card__img">
-                  <img src={p.image} alt={p.title} />
-                  <div className="port-card__overlay">
-                    <span className="port-card__view">View Case Study <HiArrowUpRight /></span>
-                  </div>
-                </div>
-                <div className="port-card__info">
-                  <div>
-                    <h3 className="port-card__title">{p.title}</h3>
-                    <span className="port-card__cat">{p.category}</span>
-                  </div>
-                  <span className="port-card__year">{p.year}</span>
-                </div>
               </div>
             </Reveal>
           ))}
