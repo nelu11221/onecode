@@ -25,6 +25,10 @@ import {
   FiMail,
   FiMapPin,
   FiPhone,
+  FiTarget,
+  FiCalendar,
+  FiMessageCircle,
+  FiCode,
 } from 'react-icons/fi';
 import emailjs from '@emailjs/browser';
 import logoWhite from './logo_white.svg';
@@ -483,13 +487,58 @@ function App() {
             </Reveal>
           </div>
         </div>
-        <Reveal delay={100}>
-          <div className="about__image-wrap">
-            <ParallaxLayer speed={-0.05} className="about__parallax-img">
-              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80" alt="Team collaboration" className="about__image" />
-            </ParallaxLayer>
+        <div className="process">
+          <div className="process__grid">
+            <Reveal>
+              <div className="process__card">
+                <div className="process__card-icon"><FiTarget /></div>
+                <h3 className="process__card-title">Focused on <em>the release</em> of the product</h3>
+                <p className="process__card-text">We align every design and development decision around your launch goals — no fluff, just results.</p>
+                <div className="process__tags">
+                  <span className="process__tag">Advanced Analytics</span>
+                  <span className="process__tag">Design Process</span>
+                  <span className="process__tag">Development</span>
+                  <span className="process__tag process__tag--accent">Release</span>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <div className="process__card">
+                <div className="process__card-icon"><FiCalendar /></div>
+                <h3 className="process__card-title">We show the result <em>weekly</em></h3>
+                <p className="process__card-text">You see progress every week — designs, prototypes, and builds shared on a fixed schedule so nothing is a surprise.</p>
+                <div className="process__week">
+                  {['M', 'T', 'W', 'T', 'F'].map((d, i) => (
+                    <span key={i} className={`process__day ${i === 4 ? 'process__day--active' : ''}`}>{d}</span>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="process__card">
+                <div className="process__card-icon"><FiMessageCircle /></div>
+                <h3 className="process__card-title">We always stay <em>in touch</em></h3>
+                <p className="process__card-text">Questions via Telegram, email, or call — we respond fast. If you can't hop on a call, we record a video walkthrough instead.</p>
+                <div className="process__chat">
+                  <span className="process__bubble process__bubble--client">Can we review the new layout?</span>
+                  <span className="process__bubble process__bubble--us">Sure! I just sent a video walkthrough.</span>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={300}>
+              <div className="process__card">
+                <div className="process__card-icon"><FiCode /></div>
+                <h3 className="process__card-title">We develop <em>transparently</em></h3>
+                <p className="process__card-text">You get access to the staging site from day one. Every change is visible in real time — full transparency, zero guesswork.</p>
+                <div className="process__tags">
+                  <span className="process__tag">Live Preview</span>
+                  <span className="process__tag">Git Access</span>
+                  <span className="process__tag">Staging Site</span>
+                </div>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
+        </div>
       </section>
 
       {/* ─── SERVICES ─── */}
@@ -520,8 +569,8 @@ function App() {
       <section className="portfolio">
         <div className="section-glow section-glow--left" />
         <div className="portfolio__header">
-          <Reveal><p className="label">Portfolio</p></Reveal>
-          <Reveal delay={100}><h2 className="heading-2">Recent <em>work</em></h2></Reveal>
+          <Reveal><p className="label">Recent Work</p></Reveal>
+          <Reveal delay={100}><h2 className="heading-2">Selected <em>projects</em></h2></Reveal>
         </div>
         <div className="portfolio__grid">
           {portfolio.map((p, i) => (
