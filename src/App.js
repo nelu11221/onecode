@@ -26,104 +26,63 @@ import {
   FiMapPin,
   FiPhone,
   FiTarget,
+  FiTrendingUp,
   FiCalendar,
   FiMessageCircle,
   FiCode,
 } from 'react-icons/fi';
 import emailjs from '@emailjs/browser';
 import logoWhite from './logo_white.svg';
+import { translations } from './i18n';
 import './App.css';
 
-/* ── Data ── */
-const sliderData = [
-  { id: 1, title: 'Landing Pages', tag: 'Web Design', description: 'High-converting landing pages that capture attention, communicate your value, and turn visitors into customers.', image: `${process.env.PUBLIC_URL}/project1.jpg` },
-  { id: 2, title: 'Multipage Websites', tag: 'Development', description: 'Fully custom websites with multiple pages, smooth navigation, and a cohesive design that tells your brand story.', image: `${process.env.PUBLIC_URL}/project5.jpg` },
-  { id: 3, title: 'UI/UX Design', tag: 'Design', description: 'User-centered interfaces designed through research, prototyping, and testing to deliver intuitive experiences.', image: `${process.env.PUBLIC_URL}/project4.jpg` },
-  { id: 4, title: 'Web Applications', tag: 'Apps', description: 'Custom web apps built with modern frameworks — dashboards, platforms, and tools tailored to your business.', image: `${process.env.PUBLIC_URL}/project6.jpg` },
-];
-
-const services = [
-  { icon: <FiLayout />, title: 'Landing Pages', description: 'One-page websites designed to convert. Perfect for product launches, campaigns, and lead generation.', num: '01' },
-  { icon: <FiLayers />, title: 'Multipage Websites', description: 'Complete websites with custom layouts, responsive design, and CMS integration for full control.', num: '02' },
-  { icon: <FiGrid />, title: 'Web Portfolios', description: 'Stunning portfolio sites that showcase your work with smooth animations and a lasting impression.', num: '03' },
-  { icon: <FiPenTool />, title: 'UI/UX Design', description: 'Research-driven design from wireframes to high-fidelity prototypes, focused on usability and beauty.', num: '04' },
-  { icon: <FiImage />, title: 'Graphic Design', description: 'Brand identities, social media assets, marketing materials, and visual content that stands out.', num: '05' },
-  { icon: <FiMonitor />, title: 'Web Applications', description: 'Custom dashboards, SaaS platforms, and interactive tools built with React, Next.js, and modern stacks.', num: '06' },
-];
-
+/* ── Language-neutral data (icons + images + non-translatable values) ── */
 const PU = process.env.PUBLIC_URL;
-const portfolio = [
-  {
-    title: 'Nymb', category: 'Landing Page', image: `${PU}/project1.jpg`, year: '2025',
-    overview: 'A sleek landing page for Nymb Ecosystem — a tokenization and gamification platform that turns time into real value.',
-    challenge: 'The client needed a single page that could communicate a complex Web3 concept in a way that feels approachable, not intimidating.',
-    solution: 'We crafted a dark, minimal design with animated particles and bold typography, paired with clear CTAs that guide visitors toward the vision and investment pages.',
-    services: ['Landing Page Design', 'Frontend Development', 'Motion Design'],
-    gallery: [`${PU}/project1b.jpg`, `${PU}/project1c.jpg`, `${PU}/project1d.jpg`, `${PU}/project1e.jpg`],
-  },
-  {
-    title: 'Dimora del Tramonto', category: 'Landing Page with Booking', image: `${PU}/project2.jpg`, year: '2025',
-    overview: 'A premium landing page for a private Tuscan villa featuring panoramic Chianti hills views and an integrated booking system.',
-    challenge: 'The villa owner wanted a site that felt as luxurious as the property itself, with a seamless booking experience that eliminated back-and-forth emails.',
-    solution: 'We designed a cinematic hero with rich landscape photography, warm gold tones, and a multi-language interface (EN/IT/DE) with a built-in availability checker and virtual tour.',
-    services: ['Landing Page Design', 'Booking Integration', 'Multi-language Support'],
-    gallery: [`${PU}/project2b.jpg`, `${PU}/project2c.jpg`, `${PU}/project2d.jpg`, `${PU}/project2e.jpg`],
-  },
-  {
-    title: 'Bimmer', category: 'Landing Page', image: `${PU}/project3.jpg`, year: '2025',
-    overview: 'A bold, typography-driven landing page for Bimmer — an automotive service company where every detail counts.',
-    challenge: 'The brand needed a digital presence that matched the precision and quality of their physical service, while standing out in a crowded automotive market.',
-    solution: 'We went with a striking black-and-white palette, oversized Romanian typography, and a structured layout that communicates trust and professionalism at first glance.',
-    services: ['Landing Page Design', 'Brand Identity', 'Frontend Development'],
-    gallery: [`${PU}/project3b.jpg`, `${PU}/project3c.jpg`, `${PU}/project3d.jpg`, `${PU}/project3e.jpg`],
-  },
-  {
-    title: 'Start', category: 'UI/UX Design', image: `${PU}/project4.jpg`, year: '2025',
-    overview: 'A complete UI/UX design for Start — a driving school platform with course management, instructor profiles, and student enrollment.',
-    challenge: 'The driving school had a complex offering — multiple course types, pricing tiers, instructors, and reviews — that needed to be organized into an intuitive multipage experience.',
-    solution: 'We designed a vibrant, energetic interface with orange and blue accents, clear navigation across 10+ pages, star ratings, and a streamlined enrollment flow.',
-    services: ['UI/UX Design', 'Wireframing', 'Prototyping', 'Design System'],
-    gallery: [`${PU}/project4b.jpg`, `${PU}/project4c.jpg`, `${PU}/project4d.jpg`, `${PU}/project4e.jpg`],
-  },
-  {
-    title: 'GranStilArt', category: 'Multipage Website', image: `${PU}/project5.jpg`, year: '2025',
-    overview: 'A full multipage website for GranStilArt — a memorial stone company crafting personalized funeral monuments with care and artistry.',
-    challenge: 'The subject matter required extreme sensitivity. The site needed to feel respectful and elegant while still being functional as a product catalog and lead generation tool.',
-    solution: 'We chose a dark, muted palette with soft lighting photography and subtle animations. The site includes a monument catalog, service pages, blog, and a tasteful contact flow.',
-    services: ['Multipage Website', 'Web Development', 'CMS Integration'],
-    gallery: [],
-  },
-  {
-    title: 'VertragPlus', category: 'Multipage Website', image: `${PU}/project6.jpg`, year: '2025',
-    overview: 'A full multipage website for VertragPlus — a food packaging company offering a wide range of packaging solutions for the food industry.',
-    challenge: 'VertragPlus needed a website that could showcase a large and diverse product catalog in a way that felt organized, trustworthy, and easy to navigate for B2B buyers.',
-    solution: 'We designed a clean, product-focused website with structured category pages, detailed product listings, and clear calls to action — making it easy for buyers to find the right packaging solution and get in touch.',
-    services: ['Multipage Website', 'Web Development', 'UI/UX Design'],
-    gallery: [`${PU}/project6b.jpg`, `${PU}/project6c.jpg`, `${PU}/project6d.jpg`, `${PU}/project6e.jpg`],
-  },
+
+const sliderImages = [
+  `${PU}/project1.jpg`,
+  `${PU}/project5.jpg`,
+  `${PU}/project4.jpg`,
+  `${PU}/project6.jpg`,
 ];
 
-const testimonials = [
-  { name: 'Sarah Johnson', role: 'Founder, Luxe Realty', text: "OneCode built us a landing page that doubled our lead conversion overnight. The design is sleek, fast, and exactly what we envisioned.", avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80' },
-  { name: 'David Chen', role: 'Creative Director, Moda Studio', text: "They designed a portfolio site that actually feels like art. Every detail was considered — it's the best investment we've made.", avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80' },
-  { name: 'Emily Rodriguez', role: 'CEO, NovaBrew', text: "From the brand identity to the full website, OneCode delivered a cohesive digital presence that elevated our entire business.", avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80' },
+const serviceIcons = [<FiLayout />, <FiLayers />, <FiTarget />, <FiTrendingUp />, <FiImage />, <FiMonitor />];
+
+const portfolioMeta = [
+  { title: 'Nymb', filterKey: 'web-dev', image: `${PU}/project1.jpg`, year: '2025', gallery: [`${PU}/project1b.jpg`, `${PU}/project1c.jpg`, `${PU}/project1d.jpg`, `${PU}/project1e.jpg`] },
+  { title: 'Dimora del Tramonto', filterKey: 'web-dev', image: `${PU}/project2.jpg`, year: '2025', gallery: [`${PU}/project2b.jpg`, `${PU}/project2c.jpg`, `${PU}/project2d.jpg`, `${PU}/project2e.jpg`] },
+  { title: 'Bimmer', filterKey: 'web-dev', image: `${PU}/project3.jpg`, year: '2025', gallery: [`${PU}/project3b.jpg`, `${PU}/project3c.jpg`, `${PU}/project3d.jpg`, `${PU}/project3e.jpg`] },
+  { title: 'Start', filterKey: 'web-dev', image: `${PU}/project4.jpg`, year: '2025', gallery: [`${PU}/project4b.jpg`, `${PU}/project4c.jpg`, `${PU}/project4d.jpg`, `${PU}/project4e.jpg`] },
+  { title: 'GranStilArt', filterKey: 'web-dev', image: `${PU}/project5.jpg`, year: '2025', gallery: [] },
+  { title: 'VertragPlus', filterKey: 'web-dev', image: `${PU}/project6.jpg`, year: '2025', gallery: [`${PU}/project6b.jpg`, `${PU}/project6c.jpg`, `${PU}/project6d.jpg`, `${PU}/project6e.jpg`] },
+  { title: 'Dimora del Tramonto — Logo', filterKey: 'graphic', image: `${PU}/project7.jpg`, year: '2025', gallery: [`${PU}/project7b.jpg`, `${PU}/project7c.jpg`] },
+  { title: 'Artmedia', filterKey: 'graphic', image: `${PU}/project8.jpg`, year: '2025', gallery: [`${PU}/project8b.jpg`, `${PU}/project8c.jpg`, `${PU}/project8d.jpg`] },
+  { title: 'Renstal', filterKey: 'graphic', image: `${PU}/project9.jpg`, year: '2025', gallery: [`${PU}/project9b.jpg`, `${PU}/project9c.jpg`, `${PU}/project9d.jpg`] },
+  { title: 'Cosmetology Clinic', filterKey: 'marketing', image: `${PU}/project10.jpg`, statsCard: true, year: '2025', gallery: [],
+    stats: { conversations: '402', costPer: '$1.08', spent: '$436.11', dailyBudget: '$5.00', reach: '10,604', impressions: '34,526' } },
+  { title: 'Trauma Clinic', filterKey: 'marketing', image: `${PU}/project11.jpg`, statsCard: true, year: '2025', gallery: [],
+    stats: { conversations: '445', costPer: '$0.98', spent: '$436.39', dailyBudget: '$5.00', reach: '20,878', impressions: '54,300' } },
+  { title: 'B2B Flower Wholesale', filterKey: 'marketing', image: `${PU}/project12.jpg`, statsCard: true, year: '2025', gallery: [],
+    stats: { conversations: '83', costPer: '$1.31', spent: '$108.53', dailyBudget: '$5.00', reach: '20,173', impressions: '27,556' } },
 ];
 
-const team = [
-  { name: 'Alex Morgan', role: 'Web Developer', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80' },
-  { name: 'Priya Sharma', role: 'UI/UX Designer', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80' },
-  { name: 'James Wilson', role: 'Graphic Designer', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80' },
-  { name: 'Lisa Park', role: 'Project Manager', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80' },
+const testimonialMeta = [
+  { name: 'Sarah Johnson', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80' },
+  { name: 'David Chen', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80' },
+  { name: 'Emily Rodriguez', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80' },
 ];
 
-const faqs = [
-  { question: 'How long does a typical project take?', answer: 'It depends on scope — a landing page can be done in 3–7 days, while a full product design + dev build typically takes 1–3 weeks. I give you a precise timeline after our discovery call, and I stick to it.' },
-  { question: 'Do you work with clients outside of Europe?', answer: 'Absolutely. I work async-first with clients across North America, the Middle East, and Southeast Asia. Time zones have never been a blocker — clear communication and good tooling make it seamless.' },
-  { question: 'What do you need from me to get started?', answer: 'A brief (or even just a rough idea), your brand assets if you have them, and a 30-minute kickoff call. I handle the rest — research, structure, design, and code.' },
-  { question: 'Do you offer ongoing support after launch?', answer: 'Yes. Every project includes 30 days of post-launch support at no extra cost. After that, I offer monthly retainer packages for clients who need continuous updates, new features, or A/B testing.' },
-  { question: 'Can you redesign an existing website without breaking it?', answer: 'That is one of my specialties. I audit your current site first — performance, UX, conversion gaps — then redesign and rebuild iteratively so the transition is smooth and your SEO is protected.' },
-  { question: 'What is your pricing like?', answer: 'Projects are quoted fixed-price based on scope, so you always know the total upfront — no surprise invoices. Landing pages start around €300, full websites from €550. Book a call and I will send a detailed quote within 24 hours.' },
+const teamMeta = [
+  { name: 'Alex Morgan', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80' },
+  { name: 'Priya Sharma', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80' },
 ];
+
+/* ── Build localized arrays from translations + meta ── */
+const buildSliderData = (t) => t.slider.map((s, i) => ({ id: i + 1, ...s, image: sliderImages[i] }));
+const buildServices = (t) => t.services.items.map((s, i) => ({ ...s, icon: serviceIcons[i], num: String(i + 1).padStart(2, '0') }));
+const buildPortfolio = (t) => portfolioMeta.map((m, i) => ({ ...m, ...t.portfolioItems[i] }));
+const buildTestimonials = (t) => testimonialMeta.map((m, i) => ({ ...m, ...t.testimonials.items[i] }));
+const buildTeam = (t) => teamMeta.map((m, i) => ({ ...m, role: t.team.roles[i] }));
 
 /* ── Custom scroll-reveal hook ── */
 function useReveal() {
@@ -180,6 +139,56 @@ function ParallaxLayer({ speed = 0.3, className = '', children }) {
 
 
 /* ── FAQ Accordion Item ── */
+/* ── Stats card (mimics ad-platform results screen) ── */
+const DEFAULT_STATS = { conversations: 402, costPer: '$1.08', spent: '$436.11', dailyBudget: '$5.00', reach: '10,604', impressions: '34,526' };
+function StatsCard({ t, compact = false, stats }) {
+  const labels = t.statsCard || {};
+  const s = { ...DEFAULT_STATS, ...(stats || {}) };
+  return (
+    <div className={`stats-card ${compact ? 'stats-card--compact' : ''}`}>
+      <div className="stats-card__head">
+        <h4 className="stats-card__title">{labels.results || 'Results'}</h4>
+        <a href="#!" className="stats-card__link" onClick={(e) => e.preventDefault()}>
+          {labels.seePerformance || 'See performance'}
+        </a>
+      </div>
+      <div className="stats-card__tabs">
+        <span className="stats-card__tab"><span className="stats-card__tab-ico">▦</span> {labels.last30 || 'Last 30 days'}</span>
+        <span className="stats-card__tab stats-card__tab--active">{labels.maximum || 'Maximum'}</span>
+        <span className="stats-card__tab">{labels.today || 'Today'}</span>
+      </div>
+      <div className="stats-card__row">
+        <div className="stats-card__metric">
+          <span className="stats-card__num">{s.conversations}</span>
+          <span className="stats-card__lbl">{labels.convosStarted || 'Conversations started in app'}</span>
+        </div>
+        <div className="stats-card__metric">
+          <span className="stats-card__num">{s.costPer}</span>
+          <span className="stats-card__lbl">{labels.costPer || 'Cost per: Conversation started in app'}</span>
+        </div>
+        <div className="stats-card__metric">
+          <span className="stats-card__num">{s.spent}</span>
+          <span className="stats-card__lbl">{labels.amountSpent || 'Amount spent'}</span>
+        </div>
+      </div>
+      <div className="stats-card__budget">
+        {labels.dailyBudget || 'Daily budget'} {s.dailyBudget} <span className="stats-card__pencil">✎</span>
+      </div>
+      <div className="stats-card__row stats-card__row--last">
+        <div className="stats-card__metric">
+          <span className="stats-card__num">{s.reach}</span>
+          <span className="stats-card__lbl">{labels.reach || 'Reach'}</span>
+        </div>
+        <div className="stats-card__metric">
+          <span className="stats-card__num">{s.impressions}</span>
+          <span className="stats-card__lbl">{labels.impressions || 'Impressions'}</span>
+        </div>
+      </div>
+      <div className="stats-card__more">⌄ {labels.more || 'More'}</div>
+    </div>
+  );
+}
+
 function FaqItem({ question, answer, isOpen, onClick, index }) {
   const contentRef = useRef(null);
   return (
@@ -198,7 +207,7 @@ function FaqItem({ question, answer, isOpen, onClick, index }) {
 }
 
 /* ── Case Study overlay ── */
-function CaseStudy({ project, onClose }) {
+function CaseStudy({ project, onClose, t }) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = ''; };
@@ -217,8 +226,12 @@ function CaseStudy({ project, onClose }) {
           <FiX />
         </button>
 
-        <div className="case__hero">
-          <img src={project.image} alt={project.title} className="case__hero-img" />
+        <div className={`case__hero ${!project.image && project.statsCard ? 'case__hero--stats' : ''}`}>
+          {project.image ? (
+            <img src={project.image} alt={project.title} className="case__hero-img" />
+          ) : project.statsCard ? (
+            <div className="case__hero-stats"><StatsCard t={t} stats={project.stats} /></div>
+          ) : null}
           <div className="case__hero-overlay" />
           <div className="case__hero-content">
             <span className="case__tag">{project.category}</span>
@@ -229,23 +242,32 @@ function CaseStudy({ project, onClose }) {
 
         <div className="case__body">
           <div className="case__section">
-            <h2 className="case__heading">Overview</h2>
+            <h2 className="case__heading">{t.caseStudy.overview}</h2>
             <p className="case__text">{project.overview}</p>
           </div>
 
           <div className="case__two-col">
             <div className="case__section">
-              <h2 className="case__heading">Challenge</h2>
+              <h2 className="case__heading">{t.caseStudy.challenge}</h2>
               <p className="case__text">{project.challenge}</p>
             </div>
             <div className="case__section">
-              <h2 className="case__heading">Solution</h2>
+              <h2 className="case__heading">{t.caseStudy.solution}</h2>
               <p className="case__text">{project.solution}</p>
             </div>
           </div>
 
+          {project.statsCard && project.image && (
+            <div className="case__section case__section--stats">
+              <h2 className="case__heading">{t.statsCard?.results || 'Results'}</h2>
+              <div className="case__stats-wrap">
+                <StatsCard t={t} stats={project.stats} />
+              </div>
+            </div>
+          )}
+
           <div className="case__section">
-            <h2 className="case__heading">Services Provided</h2>
+            <h2 className="case__heading">{t.caseStudy.servicesProvided}</h2>
             <div className="case__services">
               {project.services.map((s) => (
                 <span key={s} className="case__service-tag">{s}</span>
@@ -255,7 +277,7 @@ function CaseStudy({ project, onClose }) {
 
           {project.gallery.length > 0 && (
             <div className="case__section">
-              <h2 className="case__heading">Gallery</h2>
+              <h2 className="case__heading">{t.caseStudy.gallery}</h2>
               <div className="case__gallery">
                 {project.gallery.map((img, i) => (
                   <img key={i} src={img} alt={`${project.title} screenshot ${i + 1}`} className="case__gallery-img" />
@@ -266,10 +288,10 @@ function CaseStudy({ project, onClose }) {
 
           <div className="case__footer">
             <button className="btn btn--ghost" onClick={onClose}>
-              <HiArrowLeft /> Back to Portfolio
+              <HiArrowLeft /> {t.caseStudy.back}
             </button>
             <a href="#contact" className="btn btn--primary" onClick={onClose}>
-              <span>Start a Similar Project</span> <HiArrowRight />
+              <span>{t.caseStudy.startSimilar}</span> <HiArrowRight />
             </a>
           </div>
         </div>
@@ -279,6 +301,65 @@ function CaseStudy({ project, onClose }) {
 }
 
 /* ══════════ APP ══════════ */
+function ProjectsPage({ onOpenCase, onBack, t, portfolio }) {
+  const [filter, setFilter] = useState('all');
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const visible = portfolio.filter((p) => filter === 'all' || p.filterKey === filter);
+  return (
+    <div className="projects-page">
+      <div className="projects-page__head">
+        <button className="projects-page__back" onClick={onBack}>
+          <HiArrowLeft /> {t.projectsPage.back}
+        </button>
+        <p className="label">{t.projectsPage.label}</p>
+        <h1 className="heading-2">{t.projectsPage.headingPre} <em>{t.projectsPage.headingEm}</em></h1>
+        <p className="body-text body-text--lg projects-page__intro">{t.projectsPage.intro}</p>
+      </div>
+      <div className="portfolio__filters projects-page__filters">
+        {[{ key: 'all', label: t.portfolio.filterAll }, ...t.portfolio.filterGroups].map((group) => {
+          const isActive = filter === group.key;
+          return (
+            <button
+              key={group.key}
+              className={`portfolio__filter ${isActive ? 'portfolio__filter--active' : ''}`}
+              onClick={() => setFilter(group.key)}
+            >
+              {group.label}
+            </button>
+          );
+        })}
+      </div>
+      <div className="projects-page__grid portfolio__grid--slider">
+        {visible.map((p, i) => (
+          <div
+            key={`${filter}-${i}`}
+            className="port-card"
+            onClick={() => onOpenCase(p)}
+            role="button"
+            tabIndex={0}
+          >
+            <div className="port-card__img">
+              <img src={p.image} alt={p.title} />
+              <div className="port-card__overlay">
+                <span className="port-card__view">{t.portfolio.view} <HiArrowUpRight /></span>
+              </div>
+            </div>
+            <div className="port-card__info">
+              <div>
+                <h3 className="port-card__title">{p.title}</h3>
+                <span className="port-card__cat">{p.category}</span>
+              </div>
+              <span className="port-card__year">{p.year}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -286,7 +367,43 @@ function App() {
   const [openFaq, setOpenFaq] = useState(null);
   const [activeCase, setActiveCase] = useState(null);
   const [formStatus, setFormStatus] = useState('idle'); // idle | sending | sent | error
+  const [route, setRoute] = useState(() =>
+    typeof window !== 'undefined' && window.location.hash === '#/projects' ? 'projects' : 'home'
+  );
+  const [lang, setLang] = useState(() => {
+    if (typeof window === 'undefined') return 'en';
+    return localStorage.getItem('lang') || 'en';
+  });
+  const t = translations[lang];
+  const sliderData = buildSliderData(t);
+  const services = buildServices(t);
+  const portfolio = buildPortfolio(t);
+  const testimonials = buildTestimonials(t);
+  const faqs = t.faq.items;
+  const toggleLang = () => {
+    const next = lang === 'en' ? 'ro' : 'en';
+    setLang(next);
+    if (typeof window !== 'undefined') localStorage.setItem('lang', next);
+  };
   const formRef = useRef(null);
+
+  useEffect(() => {
+    const onHash = () => {
+      setRoute(window.location.hash === '#/projects' ? 'projects' : 'home');
+    };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  const goToProjects = (e) => {
+    if (e) e.preventDefault();
+    window.location.hash = '#/projects';
+  };
+  const goHome = (e) => {
+    if (e) e.preventDefault();
+    window.location.hash = '';
+  };
+
 
   /* Navbar scroll */
   useEffect(() => {
@@ -343,14 +460,26 @@ function App() {
         <div className="nav__inner">
           <a href="#home" className="nav__logo"><img src={logoWhite} alt="OneCode" className="nav__logo-img" /></a>
           <ul className={`nav__links ${menuOpen ? 'open' : ''}`}>
-            <li><a href="#home" onClick={() => setMenuOpen(false)}>Home</a></li>
-            <li><a href="#work" onClick={() => setMenuOpen(false)}>Work</a></li>
-            <li><a href="#services" onClick={() => setMenuOpen(false)}>Services</a></li>
-            <li><a href="#about" onClick={() => setMenuOpen(false)}>About</a></li>
-            <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
+            <li><a href="#home" onClick={() => setMenuOpen(false)}>{t.nav.home}</a></li>
+            <li><a href="#work" onClick={() => setMenuOpen(false)}>{t.nav.work}</a></li>
+            <li><a href="#services" onClick={() => setMenuOpen(false)}>{t.nav.services}</a></li>
+            <li><a href="#about" onClick={() => setMenuOpen(false)}>{t.nav.about}</a></li>
+            <li><a href="#contact" onClick={() => setMenuOpen(false)}>{t.nav.contact}</a></li>
+            <li className="nav__links-lang">
+              <button className="nav__lang nav__lang--menu" onClick={toggleLang} aria-label="Toggle language">
+                <span className={lang === 'en' ? 'nav__lang-active' : ''}>EN</span>
+                <span className="nav__lang-sep">/</span>
+                <span className={lang === 'ro' ? 'nav__lang-active' : ''}>RO</span>
+              </button>
+            </li>
           </ul>
           <div className="nav__right">
-            <a href="#contact" className="nav__cta">Start a Project <HiArrowUpRight /></a>
+            <button className="nav__lang nav__lang--desktop" onClick={toggleLang} aria-label="Toggle language">
+              <span className={lang === 'en' ? 'nav__lang-active' : ''}>EN</span>
+              <span className="nav__lang-sep">/</span>
+              <span className={lang === 'ro' ? 'nav__lang-active' : ''}>RO</span>
+            </button>
+            <a href="#contact" className="nav__cta">{t.nav.cta} <HiArrowUpRight /></a>
             <button className="nav__burger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
               {menuOpen ? <FiX /> : <FiMenu />}
             </button>
@@ -358,6 +487,10 @@ function App() {
         </div>
       </nav>
 
+      {route === 'projects' ? (
+        <ProjectsPage onOpenCase={setActiveCase} onBack={goHome} t={t} portfolio={portfolio} />
+      ) : (
+      <>
       {/* ─── HERO ─── */}
       <section className="hero" id="home">
         {/* Animated floating gradient blobs */}
@@ -371,37 +504,31 @@ function App() {
 
         <ParallaxLayer speed={-0.15} className="hero__content-wrap">
           <div className="hero__content">
-            <p className="hero__tag anim-hero anim-hero--1">Web Design & Development Studio</p>
+            <p className="hero__tag anim-hero anim-hero--1">{t.hero.tag}</p>
             <h1 className="hero__title anim-hero anim-hero--2">
-              We design websites that{' '}
-              <em className="hero__italic">convert</em>{' '}
-              and inspire
+              {t.hero.title1}{' '}
+              <em className="hero__italic">{t.hero.titleItalic}</em>{' '}
+              {t.hero.title2}
             </h1>
-            <p className="hero__sub anim-hero anim-hero--3">
-              Landing pages, portfolios, multipage websites, and custom web apps &mdash;
-              crafted with precision to grow your brand online.
-            </p>
+            <p className="hero__sub anim-hero anim-hero--3">{t.hero.subtitle}</p>
             <div className="hero__actions anim-hero anim-hero--4">
               <a href="#work" className="btn btn--primary">
-                <span>See Our Work</span> <HiArrowRight />
+                <span className="btn__label-desktop">{t.hero.primaryDesktop}</span>
+                <span className="btn__label-mobile">{t.hero.primaryMobile}</span>
+                <HiArrowRight />
               </a>
-              <a href="#services" className="btn btn--ghost">Our Services</a>
+              <a href="#services" className="btn btn--ghost">{t.hero.secondary}</a>
             </div>
           </div>
         </ParallaxLayer>
 
-        <div className="hero__scroll anim-hero anim-hero--5">
-          <span>Scroll</span>
-          <FiArrowDown className="hero__scroll-icon" />
+        <div className="hero__bottom-block hero__mobile-only anim-hero anim-hero--5">
+          <p className="hero__bottom-sub">{t.hero.subtitle}</p>
         </div>
 
-        <div className="hero__stats">
-          {[['150+', 'Projects'], ['50+', 'Clients'], ['8+', 'Years']].map(([num, label], i) => (
-            <div key={label} className={`hero__stat anim-hero anim-hero--${i + 5}`}>
-              <span className="hero__stat-num">{num}</span>
-              <span className="hero__stat-label">{label}</span>
-            </div>
-          ))}
+        <div className="hero__scroll anim-hero anim-hero--5">
+          <span>{t.hero.scroll}</span>
+          <FiArrowDown className="hero__scroll-icon" />
         </div>
 
       </section>
@@ -422,8 +549,8 @@ function App() {
       {/* ─── SHOWCASE / SLIDER ─── */}
       <section className="showcase" id="work">
         <div className="section-glow section-glow--left" />
-        <Reveal><p className="label">Featured Work</p></Reveal>
-        <Reveal delay={100}><h2 className="heading-2">Selected <em>projects</em></h2></Reveal>
+        <Reveal><p className="label">{t.showcase.label}</p></Reveal>
+        <Reveal delay={100}><h2 className="heading-2">{t.showcase.headingPre} <em>{t.showcase.headingEm}</em></h2></Reveal>
         <div className="showcase__spacer" />
 
         <div className="showcase__slider">
@@ -441,9 +568,9 @@ function App() {
               <p className="body-text">{sliderData[currentSlide].description}</p>
             </div>
             <div className="showcase__controls">
-              <button className="showcase__arrow" onClick={prev} aria-label="Previous"><HiChevronLeft /></button>
+              <button className="showcase__arrow" onClick={prev} aria-label={t.showcase.prev}><HiChevronLeft /></button>
               <span className="showcase__count">{String(currentSlide + 1).padStart(2, '0')} / {String(sliderData.length).padStart(2, '0')}</span>
-              <button className="showcase__arrow" onClick={next} aria-label="Next"><HiChevronRight /></button>
+              <button className="showcase__arrow" onClick={next} aria-label={t.showcase.next}><HiChevronRight /></button>
             </div>
             <div className="showcase__progress">
               <div className="showcase__progress-bar" key={`bar-${currentSlide}`} />
@@ -456,17 +583,20 @@ function App() {
       <section className="portfolio">
         <div className="section-glow section-glow--left" />
         <div className="portfolio__header">
-          <Reveal><p className="label">Portfolio</p></Reveal>
-          <Reveal delay={100}><h2 className="heading-2">Recent <em>work</em></h2></Reveal>
+          <Reveal><p className="label">{t.portfolio.label}</p></Reveal>
+          <Reveal delay={100}>
+            <h2 className="heading-2 portfolio__heading-desktop">{t.portfolio.headingPre} <em>{t.portfolio.headingEm}</em></h2>
+            <h2 className="heading-2 portfolio__heading-mobile">{t.portfolio.headingMobilePre} <em>{t.portfolio.headingMobileEm}</em></h2>
+          </Reveal>
         </div>
-        <div className="portfolio__grid">
-          {portfolio.map((p, i) => (
+        <div className="portfolio__grid portfolio__grid--slider">
+          {portfolio.filter((p) => p.title !== 'GranStilArt').slice(0, 6).map((p, i) => (
             <Reveal delay={i * 80} key={i}>
               <div className="port-card" onClick={() => setActiveCase(p)} role="button" tabIndex={0}>
-                <div className="port-card__img">
-                  <img src={p.image} alt={p.title} />
+                <div className={`port-card__img ${!p.image && p.statsCard ? 'port-card__img--stats' : ''}`}>
+                  {p.image ? <img src={p.image} alt={p.title} /> : (p.statsCard ? <StatsCard t={t} compact stats={p.stats} /> : null)}
                   <div className="port-card__overlay">
-                    <span className="port-card__view">View Case Study <HiArrowUpRight /></span>
+                    <span className="port-card__view">{t.portfolio.view} <HiArrowUpRight /></span>
                   </div>
                 </div>
                 <div className="port-card__info">
@@ -480,6 +610,13 @@ function App() {
             </Reveal>
           ))}
         </div>
+        <Reveal delay={120}>
+          <div className="portfolio__cta">
+            <a href="#/projects" onClick={goToProjects} className="btn btn--ghost">
+              {t.portfolio.seeAll} <HiArrowUpRight />
+            </a>
+          </div>
+        </Reveal>
       </section>
 
       {/* ─── ABOUT ─── */}
@@ -487,25 +624,20 @@ function App() {
         <div className="section-glow section-glow--right" />
         <div className="about__inner">
           <div className="about__left">
-            <Reveal><p className="label">About Us</p></Reveal>
+            <Reveal><p className="label">{t.about.label}</p></Reveal>
             <Reveal delay={100}>
               <h2 className="heading-2">
-                We design with purpose and build with <em>precision</em>
+                {t.about.headingPre} <em>{t.about.headingEm}</em>
               </h2>
             </Reveal>
           </div>
           <div className="about__right">
             <Reveal delay={150}>
-              <p className="body-text body-text--lg">
-                OneCode is a web design and development studio that helps businesses
-                stand out online. From single landing pages to full multipage websites,
-                we combine clean UI/UX design with solid development to deliver
-                digital products that look great and perform even better.
-              </p>
+              <p className="body-text body-text--lg">{t.about.body}</p>
             </Reveal>
             <Reveal delay={200}>
               <div className="about__features">
-                {['Pixel-perfect design', 'Mobile-first development', 'Fast turnaround times', 'Ongoing support & revisions'].map((f) => (
+                {t.about.features.map((f) => (
                   <div className="about__feat" key={f}>
                     <span className="about__check" /><span>{f}</span>
                   </div>
@@ -513,7 +645,7 @@ function App() {
               </div>
             </Reveal>
             <Reveal delay={250}>
-              <a href="#services" className="btn btn--primary"><span>See Our Services</span> <HiArrowRight /></a>
+              <a href="#services" className="btn btn--primary"><span>{t.about.seeServices}</span> <HiArrowRight /></a>
             </Reveal>
           </div>
         </div>
@@ -522,21 +654,20 @@ function App() {
             <Reveal>
               <div className="process__card">
                 <div className="process__card-icon"><FiTarget /></div>
-                <h3 className="process__card-title">Focused on <em>the release</em> of the product</h3>
-                <p className="process__card-text">We align every design and development decision around your launch goals — no fluff, just results.</p>
+                <h3 className="process__card-title">{t.process.card1.title} <em>{t.process.card1.titleEm}</em> {t.process.card1.titleSuffix}</h3>
+                <p className="process__card-text">{t.process.card1.text}</p>
                 <div className="process__tags">
-                  <span className="process__tag">Advanced Analytics</span>
-                  <span className="process__tag">Design Process</span>
-                  <span className="process__tag">Development</span>
-                  <span className="process__tag process__tag--accent">Release</span>
+                  {t.process.card1.tags.map((tag, i) => (
+                    <span key={i} className={`process__tag ${i === t.process.card1.tags.length - 1 ? 'process__tag--accent' : ''}`}>{tag}</span>
+                  ))}
                 </div>
               </div>
             </Reveal>
             <Reveal delay={100}>
               <div className="process__card">
                 <div className="process__card-icon"><FiCalendar /></div>
-                <h3 className="process__card-title">We show the result <em>weekly</em></h3>
-                <p className="process__card-text">You see progress every week — designs, prototypes, and builds shared on a fixed schedule so nothing is a surprise.</p>
+                <h3 className="process__card-title">{t.process.card2.title} <em>{t.process.card2.titleEm}</em></h3>
+                <p className="process__card-text">{t.process.card2.text}</p>
                 <div className="process__week">
                   {['M', 'T', 'W', 'T', 'F'].map((d, i) => (
                     <span key={i} className={`process__day ${i === 4 ? 'process__day--active' : ''}`}>{d}</span>
@@ -547,23 +678,23 @@ function App() {
             <Reveal delay={200}>
               <div className="process__card">
                 <div className="process__card-icon"><FiMessageCircle /></div>
-                <h3 className="process__card-title">We always stay <em>in touch</em></h3>
-                <p className="process__card-text">Questions via Telegram, email, or call — we respond fast. If you can't hop on a call, we record a video walkthrough instead.</p>
+                <h3 className="process__card-title">{t.process.card3.title} <em>{t.process.card3.titleEm}</em></h3>
+                <p className="process__card-text">{t.process.card3.text}</p>
                 <div className="process__chat">
-                  <span className="process__bubble process__bubble--client">Can we review the new layout?</span>
-                  <span className="process__bubble process__bubble--us">Sure! I just sent a video walkthrough.</span>
+                  <span className="process__bubble process__bubble--client">{t.process.card3.chatClient}</span>
+                  <span className="process__bubble process__bubble--us">{t.process.card3.chatUs}</span>
                 </div>
               </div>
             </Reveal>
             <Reveal delay={300}>
               <div className="process__card">
                 <div className="process__card-icon"><FiCode /></div>
-                <h3 className="process__card-title">We develop <em>transparently</em></h3>
-                <p className="process__card-text">You get access to the staging site from day one. Every change is visible in real time — full transparency, zero guesswork.</p>
+                <h3 className="process__card-title">{t.process.card4.title} <em>{t.process.card4.titleEm}</em></h3>
+                <p className="process__card-text">{t.process.card4.text}</p>
                 <div className="process__tags">
-                  <span className="process__tag">Live Preview</span>
-                  <span className="process__tag">Git Access</span>
-                  <span className="process__tag">Staging Site</span>
+                  {t.process.card4.tags.map((tag, i) => (
+                    <span key={i} className="process__tag">{tag}</span>
+                  ))}
                 </div>
               </div>
             </Reveal>
@@ -575,8 +706,8 @@ function App() {
       <section className="services" id="services">
         <div className="section-glow section-glow--center" />
         <div className="services__header">
-          <Reveal><p className="label">Our Services</p></Reveal>
-          <Reveal delay={100}><h2 className="heading-2">Everything you need to go <em>live</em></h2></Reveal>
+          <Reveal><p className="label">{t.services.label}</p></Reveal>
+          <Reveal delay={100}><h2 className="heading-2">{t.services.headingPre} <em>{t.services.headingEm}</em></h2></Reveal>
         </div>
         <div className="services__grid">
           {services.map((s, i) => (
@@ -599,8 +730,8 @@ function App() {
       <section className="testimonials">
         <div className="section-glow section-glow--right" />
         <div className="testimonials__header">
-          <Reveal><p className="label">Testimonials</p></Reveal>
-          <Reveal delay={100}><h2 className="heading-2">What our <em>clients</em> say</h2></Reveal>
+          <Reveal><p className="label">{t.testimonials.label}</p></Reveal>
+          <Reveal delay={100}><h2 className="heading-2">{t.testimonials.headingPre} <em>{t.testimonials.headingEm}</em> {t.testimonials.headingSuffix}</h2></Reveal>
         </div>
         <div className="testimonials__list">
           {testimonials.map((t, i) => (
@@ -625,9 +756,9 @@ function App() {
         <div className="section-glow section-glow--center" />
         <div className="faq__inner">
           <div className="faq__header">
-            <Reveal><p className="label">FAQ</p></Reveal>
-            <Reveal delay={100}><h2 className="heading-2">Frequently asked <em>questions</em></h2></Reveal>
-            <Reveal delay={150}><p className="body-text body-text--lg faq__subtitle">Everything you need to know before we start working together.</p></Reveal>
+            <Reveal><p className="label">{t.faq.label}</p></Reveal>
+            <Reveal delay={100}><h2 className="heading-2">{t.faq.headingPre} <em>{t.faq.headingEm}</em></h2></Reveal>
+            <Reveal delay={150}><p className="body-text body-text--lg faq__subtitle">{t.faq.subtitle}</p></Reveal>
           </div>
           <div className="faq__list">
             {faqs.map((faq, i) => (
@@ -645,36 +776,15 @@ function App() {
         </div>
       </section>
 
-      {/* ─── TEAM ─── */}
-      <section className="team">
-        <div className="team__header">
-          <Reveal><p className="label">The Team</p></Reveal>
-          <Reveal delay={100}><h2 className="heading-2">The people behind <em>OneCode</em></h2></Reveal>
-        </div>
-        <div className="team__grid">
-          {team.map((m, i) => (
-            <Reveal delay={i * 100} key={i}>
-              <div className="team-card">
-                <div className="team-card__img"><img src={m.image} alt={m.name} /></div>
-                <h3 className="team-card__name">{m.name}</h3>
-                <span className="team-card__role">{m.role}</span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       {/* ─── CONTACT ─── */}
       <section className="contact" id="contact">
         <div className="section-glow section-glow--center" />
         <div className="contact__inner">
           <div className="contact__left">
-            <Reveal><p className="label">Get In Touch</p></Reveal>
-            <Reveal delay={100}><h2 className="heading-2">Let's bring your vision <em>online</em></h2></Reveal>
+            <Reveal><p className="label">{t.contact.label}</p></Reveal>
+            <Reveal delay={100}><h2 className="heading-2">{t.contact.headingPre} <em>{t.contact.headingEm}</em></h2></Reveal>
             <Reveal delay={150}>
-              <p className="body-text body-text--lg">
-                Need a landing page, a full website, or a custom web app? Tell us about your project and we'll get back to you within 24 hours.
-              </p>
+              <p className="body-text body-text--lg">{t.contact.body}</p>
             </Reveal>
             <Reveal delay={200}>
               <div className="contact__details">
@@ -686,26 +796,20 @@ function App() {
           </div>
           <Reveal delay={150} className="contact__right">
             <form className="contact__form" ref={formRef} onSubmit={handleSubmit}>
-              <input type="text" name="from_name" placeholder="Name" className="form-field" required />
-              <input type="email" name="from_email" placeholder="Email" className="form-field" required />
+              <input type="text" name="from_name" placeholder={t.contact.form.name} className="form-field" required />
+              <input type="email" name="from_email" placeholder={t.contact.form.email} className="form-field" required />
               <select name="service" className="form-field form-select" required>
-                <option value="">Select a service</option>
-                <option>Landing Page</option>
-                <option>Multipage Website</option>
-                <option>Web Portfolio</option>
-                <option>UI/UX Design</option>
-                <option>Graphic Design</option>
-                <option>Web Application</option>
-                <option>Other</option>
+                <option value="">{t.contact.form.selectService}</option>
+                {t.contact.form.serviceOptions.map((opt) => <option key={opt}>{opt}</option>)}
               </select>
-              <textarea name="message" placeholder="Tell us about your project..." className="form-field form-textarea" rows="5" required />
+              <textarea name="message" placeholder={t.contact.form.message} className="form-field form-textarea" rows="5" required />
               <input type="hidden" name="time" value={new Date().toLocaleString()} />
               <button type="submit" className={`btn btn--primary btn--full ${formStatus === 'sent' ? 'btn--success' : ''} ${formStatus === 'error' ? 'btn--error' : ''}`} disabled={formStatus === 'sending'}>
                 <span>
-                  {formStatus === 'idle' && 'Send Message'}
-                  {formStatus === 'sending' && 'Sending...'}
-                  {formStatus === 'sent' && 'Message Sent!'}
-                  {formStatus === 'error' && 'Failed — Try Again'}
+                  {formStatus === 'idle' && t.contact.form.statusIdle}
+                  {formStatus === 'sending' && t.contact.form.statusSending}
+                  {formStatus === 'sent' && t.contact.form.statusSent}
+                  {formStatus === 'error' && t.contact.form.statusError}
                 </span>
                 {formStatus === 'idle' && <HiArrowRight />}
               </button>
@@ -713,13 +817,15 @@ function App() {
           </Reveal>
         </div>
       </section>
+      </>
+      )}
 
       {/* ─── FOOTER ─── */}
       <footer className="footer">
         <div className="footer__top">
           <div className="footer__brand">
             <a href="#home" className="nav__logo"><img src={logoWhite} alt="OneCode" className="nav__logo-img" /></a>
-            <p className="footer__tagline">Web design & development studio crafting digital experiences that convert.</p>
+            <p className="footer__tagline">{t.footer.tagline}</p>
             <div className="footer__socials">
               <a href="#!" aria-label="LinkedIn"><FiLinkedin /></a>
               <a href="#!" aria-label="Twitter"><FiTwitter /></a>
@@ -727,19 +833,31 @@ function App() {
               <a href="#!" aria-label="Dribbble"><FiDribbble /></a>
             </div>
           </div>
-          <div className="footer__col"><h4>Company</h4><a href="#about">About</a><a href="#work">Work</a><a href="#!">Careers</a><a href="#contact">Contact</a></div>
-          <div className="footer__col"><h4>Services</h4><a href="#!">Landing Pages</a><a href="#!">Multipage Websites</a><a href="#!">Web Portfolios</a><a href="#!">UI/UX Design</a></div>
-          <div className="footer__col"><h4>Resources</h4><a href="#!">Blog</a><a href="#!">Case Studies</a><a href="#!">Documentation</a><a href="#!">Support</a></div>
+          <div className="footer__col">
+            <h4>{t.footer.company}</h4>
+            {t.footer.companyLinks.map((label, i) => {
+              const hrefs = ['#about', '#work', '#!', '#contact'];
+              return <a key={i} href={hrefs[i]}>{label}</a>;
+            })}
+          </div>
+          <div className="footer__col">
+            <h4>{t.footer.services}</h4>
+            {t.footer.serviceLinks.map((label, i) => <a key={i} href="#!">{label}</a>)}
+          </div>
+          <div className="footer__col">
+            <h4>{t.footer.resources}</h4>
+            {t.footer.resourceLinks.map((label, i) => <a key={i} href="#!">{label}</a>)}
+          </div>
         </div>
         <div className="footer__bottom">
-          <p>&copy; 2026 OneCode. All rights reserved.</p>
-          <div className="footer__bottom-links"><a href="#!">Privacy</a><a href="#!">Terms</a></div>
+          <p>{t.footer.copyright}</p>
+          <div className="footer__bottom-links"><a href="#!">{t.footer.privacy}</a><a href="#!">{t.footer.terms}</a></div>
         </div>
       </footer>
 
       {/* ─── CASE STUDY OVERLAY ─── */}
       {activeCase && (
-        <CaseStudy project={activeCase} onClose={() => setActiveCase(null)} />
+        <CaseStudy project={activeCase} onClose={() => setActiveCase(null)} t={t} />
       )}
     </div>
   );

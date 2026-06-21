@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 767px) {
+  html, body {
+    overflow-x: clip;
+    max-width: 100vw;
+  }
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
