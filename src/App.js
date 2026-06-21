@@ -11,8 +11,6 @@ import {
 import {
   FiLayout,
   FiLayers,
-  FiGrid,
-  FiPenTool,
   FiImage,
   FiMonitor,
   FiGithub,
@@ -72,17 +70,11 @@ const testimonialMeta = [
   { name: 'Emily Rodriguez', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80' },
 ];
 
-const teamMeta = [
-  { name: 'Alex Morgan', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80' },
-  { name: 'Priya Sharma', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80' },
-];
-
 /* ── Build localized arrays from translations + meta ── */
 const buildSliderData = (t) => t.slider.map((s, i) => ({ id: i + 1, ...s, image: sliderImages[i] }));
 const buildServices = (t) => t.services.items.map((s, i) => ({ ...s, icon: serviceIcons[i], num: String(i + 1).padStart(2, '0') }));
 const buildPortfolio = (t) => portfolioMeta.map((m, i) => ({ ...m, ...t.portfolioItems[i] }));
 const buildTestimonials = (t) => testimonialMeta.map((m, i) => ({ ...m, ...t.testimonials.items[i] }));
-const buildTeam = (t) => teamMeta.map((m, i) => ({ ...m, role: t.team.roles[i] }));
 
 /* ── Custom scroll-reveal hook ── */
 function useReveal() {
@@ -416,7 +408,7 @@ function App() {
   useEffect(() => {
     const t = setInterval(() => setCurrentSlide((p) => (p + 1) % sliderData.length), 5000);
     return () => clearInterval(t);
-  }, []);
+  }, [sliderData.length]);
 
   const prev = () => setCurrentSlide((p) => (p - 1 + sliderData.length) % sliderData.length);
   const next = () => setCurrentSlide((p) => (p + 1) % sliderData.length);
