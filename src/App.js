@@ -220,7 +220,7 @@ function CaseStudy({ project, onClose, t }) {
 
         <div className={`case__hero ${!project.image && project.statsCard ? 'case__hero--stats' : ''}`}>
           {project.image ? (
-            <img src={project.image} alt={project.title} className="case__hero-img" />
+            <img src={project.image} alt={project.title} className="case__hero-img" decoding="async" />
           ) : project.statsCard ? (
             <div className="case__hero-stats"><StatsCard t={t} stats={project.stats} /></div>
           ) : null}
@@ -272,7 +272,7 @@ function CaseStudy({ project, onClose, t }) {
               <h2 className="case__heading">{t.caseStudy.gallery}</h2>
               <div className="case__gallery">
                 {project.gallery.map((img, i) => (
-                  <img key={i} src={img} alt={`${project.title} screenshot ${i + 1}`} className="case__gallery-img" />
+                  <img key={i} src={img} alt={`${project.title} screenshot ${i + 1}`} className="case__gallery-img" loading="lazy" decoding="async" />
                 ))}
               </div>
             </div>
@@ -333,7 +333,7 @@ function ProjectsPage({ onOpenCase, onBack, t, portfolio }) {
             tabIndex={0}
           >
             <div className="port-card__img">
-              <img src={p.image} alt={p.title} />
+              <img src={p.image} alt={p.title} loading="lazy" decoding="async" />
               <div className="port-card__overlay">
                 <span className="port-card__view">{t.portfolio.view} <HiArrowUpRight /></span>
               </div>
@@ -375,8 +375,14 @@ function App() {
   const toggleLang = () => {
     const next = lang === 'en' ? 'ro' : 'en';
     setLang(next);
-    if (typeof window !== 'undefined') localStorage.setItem('lang', next);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('lang', next);
+      document.documentElement.lang = next;
+    }
   };
+  useEffect(() => {
+    if (typeof document !== 'undefined') document.documentElement.lang = lang;
+  }, [lang]);
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -450,7 +456,7 @@ function App() {
       {/* ─── NAVBAR ─── */}
       <nav className={`nav ${navScrolled ? 'nav--scrolled' : ''}`}>
         <div className="nav__inner">
-          <a href="#home" className="nav__logo"><img src={logoWhite} alt="OneCode" className="nav__logo-img" /></a>
+          <a href="#home" className="nav__logo"><img src={logoWhite} alt="OneCode" className="nav__logo-img" width="120" height="32" /></a>
           <ul className={`nav__links ${menuOpen ? 'open' : ''}`}>
             <li><a href="#home" onClick={() => setMenuOpen(false)}>{t.nav.home}</a></li>
             <li><a href="#work" onClick={() => setMenuOpen(false)}>{t.nav.work}</a></li>
@@ -549,6 +555,7 @@ function App() {
           <div className="showcase__slider-img">
             {sliderData.map((slide, index) => (
               <img key={slide.id} src={slide.image} alt={slide.title}
+                loading={index === 0 ? 'eager' : 'lazy'} decoding="async"
                 className={`showcase__img ${index === currentSlide ? 'active' : ''}`} />
             ))}
             <div className="showcase__slider-overlay" />
@@ -586,7 +593,7 @@ function App() {
             <Reveal delay={i * 80} key={i}>
               <div className="port-card" onClick={() => setActiveCase(p)} role="button" tabIndex={0}>
                 <div className={`port-card__img ${!p.image && p.statsCard ? 'port-card__img--stats' : ''}`}>
-                  {p.image ? <img src={p.image} alt={p.title} /> : (p.statsCard ? <StatsCard t={t} compact stats={p.stats} /> : null)}
+                  {p.image ? <img src={p.image} alt={p.title} loading="lazy" decoding="async" /> : (p.statsCard ? <StatsCard t={t} compact stats={p.stats} /> : null)}
                   <div className="port-card__overlay">
                     <span className="port-card__view">{t.portfolio.view} <HiArrowUpRight /></span>
                   </div>
@@ -731,7 +738,7 @@ function App() {
               <div className="testi-card">
                 <p className="testi-card__text">"{t.text}"</p>
                 <div className="testi-card__author">
-                  <img src={t.avatar} alt={t.name} className="testi-card__avatar" />
+                  <img src={t.avatar} alt={t.name} className="testi-card__avatar" loading="lazy" decoding="async" width="48" height="48" />
                   <div>
                     <h4 className="testi-card__name">{t.name}</h4>
                     <span className="testi-card__role">{t.role}</span>
@@ -788,13 +795,17 @@ function App() {
           </div>
           <Reveal delay={150} className="contact__right">
             <form className="contact__form" ref={formRef} onSubmit={handleSubmit}>
-              <input type="text" name="from_name" placeholder={t.contact.form.name} className="form-field" required />
-              <input type="email" name="from_email" placeholder={t.contact.form.email} className="form-field" required />
-              <select name="service" className="form-field form-select" required>
+              <label className="sr-only" htmlFor="from_name">{t.contact.form.name}</label>
+              <input id="from_name" type="text" name="from_name" placeholder={t.contact.form.name} className="form-field" required autoComplete="name" />
+              <label className="sr-only" htmlFor="from_email">{t.contact.form.email}</label>
+              <input id="from_email" type="email" name="from_email" placeholder={t.contact.form.email} className="form-field" required autoComplete="email" />
+              <label className="sr-only" htmlFor="service">{t.contact.form.selectService}</label>
+              <select id="service" name="service" className="form-field form-select" required>
                 <option value="">{t.contact.form.selectService}</option>
                 {t.contact.form.serviceOptions.map((opt) => <option key={opt}>{opt}</option>)}
               </select>
-              <textarea name="message" placeholder={t.contact.form.message} className="form-field form-textarea" rows="5" required />
+              <label className="sr-only" htmlFor="message">{t.contact.form.message}</label>
+              <textarea id="message" name="message" placeholder={t.contact.form.message} className="form-field form-textarea" rows="5" required />
               <input type="hidden" name="time" value={new Date().toLocaleString()} />
               <button type="submit" className={`btn btn--primary btn--full ${formStatus === 'sent' ? 'btn--success' : ''} ${formStatus === 'error' ? 'btn--error' : ''}`} disabled={formStatus === 'sending'}>
                 <span>
@@ -816,7 +827,7 @@ function App() {
       <footer className="footer">
         <div className="footer__top">
           <div className="footer__brand">
-            <a href="#home" className="nav__logo"><img src={logoWhite} alt="OneCode" className="nav__logo-img" /></a>
+            <a href="#home" className="nav__logo"><img src={logoWhite} alt="OneCode" className="nav__logo-img" loading="lazy" decoding="async" /></a>
             <p className="footer__tagline">{t.footer.tagline}</p>
             <div className="footer__socials">
               <a href="#!" aria-label="LinkedIn"><FiLinkedin /></a>
