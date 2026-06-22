@@ -1408,3 +1408,56 @@ button { font-family: var(--sans); }
     scroll-behavior: auto !important;
   }
 }
+
+/* ═══════════════════════════════════════════════
+   PERFORMANCE: disable hover effects on touch
+   (avoid sticky :hover on mobile + GPU paint cost)
+   ═══════════════════════════════════════════════ */
+@media (hover: none), (pointer: coarse) {
+  /* Cancel transforms + shadows + filter changes that trigger compositing */
+  .btn:hover,
+  .btn--primary:hover,
+  .btn--ghost:hover,
+  .nav__cta:hover,
+  .service-card:hover,
+  .port-card:hover .port-card__img,
+  .port-card:hover .port-card__img img,
+  .port-card:hover .port-card__overlay,
+  .port-card__view:hover,
+  .team-card:hover .team-card__img,
+  .team-card:hover .team-card__img img,
+  .testi-card:hover,
+  .case__close:hover,
+  .showcase__arrow:hover,
+  .portfolio__filter:hover,
+  .footer__socials a:hover,
+  .faq-item:hover,
+  .process__card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    background: inherit !important;
+    border-color: inherit !important;
+  }
+
+  /* Drop the slow color/border/bg transitions when no hover possible */
+  .btn, .port-card, .port-card__img, .port-card__img img, .port-card__overlay,
+  .team-card__img, .team-card__img img, .testi-card, .service-card,
+  .nav__links a, .nav__cta, .footer__col a, .footer__socials a,
+  .portfolio__filter, .case__close, .showcase__arrow, .faq-item,
+  .process__card, .port-card__view {
+    transition: none !important;
+  }
+
+  /* Re-add a tiny visual touch feedback on tappable cards
+     (cheap: just opacity, GPU-friendly) */
+  .btn:active, .port-card:active, .testi-card:active, .service-card:active,
+  .portfolio__filter:active, .case__close:active {
+    opacity: 0.85;
+    transition: opacity 0.15s ease !important;
+  }
+
+  /* Kill the desktop image overlay (View Case Study) on mobile —
+     it never fires on touch anyway */
+  .port-card__overlay { display: none; }
+}
