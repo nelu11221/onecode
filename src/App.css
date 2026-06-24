@@ -1137,7 +1137,7 @@ button { font-family: var(--sans); }
 }
 .footer__col { display: flex; flex-direction: column; gap: 14px; }
 .footer__col h4 { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-200); margin-bottom: 4px; }
-.footer__col a { font-size: 0.88rem; color: var(--gray-400); transition: color 0.3s; }
+.footer__col a, .footer__col-static { font-size: 0.88rem; color: var(--gray-400); transition: color 0.3s; display: block; }
 .footer__col a:hover { color: var(--white); }
 .footer__bottom {
   max-width: var(--max-w); margin: 0 auto;

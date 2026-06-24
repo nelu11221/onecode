@@ -787,9 +787,9 @@ function App() {
             </Reveal>
             <Reveal delay={200}>
               <div className="contact__details">
-                <div className="contact__item"><FiMail /> hello@onecode.dev</div>
-                <div className="contact__item"><FiPhone /> +1 (555) 123-4567</div>
-                <div className="contact__item"><FiMapPin /> San Francisco, CA</div>
+                <div className="contact__item"><FiMail /> <a href="mailto:urmadigital@gmail.com">urmadigital@gmail.com</a></div>
+                <div className="contact__item"><FiPhone /> <a href="tel:+37379454943">+373 79 45 49 43</a></div>
+                <div className="contact__item"><FiMapPin /> Chișinău, MD</div>
               </div>
             </Reveal>
           </div>
@@ -799,6 +799,8 @@ function App() {
               <input id="from_name" type="text" name="from_name" placeholder={t.contact.form.name} className="form-field" required autoComplete="name" />
               <label className="sr-only" htmlFor="from_email">{t.contact.form.email}</label>
               <input id="from_email" type="email" name="from_email" placeholder={t.contact.form.email} className="form-field" required autoComplete="email" />
+              <label className="sr-only" htmlFor="from_phone">{t.contact.form.phone}</label>
+              <input id="from_phone" type="tel" name="from_phone" placeholder={t.contact.form.phone} className="form-field" required autoComplete="tel" />
               <label className="sr-only" htmlFor="service">{t.contact.form.selectService}</label>
               <select id="service" name="service" className="form-field form-select" required>
                 <option value="">{t.contact.form.selectService}</option>
@@ -839,17 +841,19 @@ function App() {
           <div className="footer__col">
             <h4>{t.footer.company}</h4>
             {t.footer.companyLinks.map((label, i) => {
-              const hrefs = ['#about', '#work', '#!', '#contact'];
+              const hrefs = ['#about', '#work', '#services', '#contact'];
               return <a key={i} href={hrefs[i]}>{label}</a>;
             })}
           </div>
           <div className="footer__col">
             <h4>{t.footer.services}</h4>
-            {t.footer.serviceLinks.map((label, i) => <a key={i} href="#!">{label}</a>)}
+            {t.footer.serviceLinks.map((label, i) => <a key={i} href="#services">{label}</a>)}
           </div>
           <div className="footer__col">
             <h4>{t.footer.resources}</h4>
-            {t.footer.resourceLinks.map((label, i) => <a key={i} href="#!">{label}</a>)}
+            <a href="mailto:urmadigital@gmail.com">urmadigital@gmail.com</a>
+            <a href="tel:+37379454943">+373 79 45 49 43</a>
+            <span className="footer__col-static">Chișinău, MD</span>
           </div>
         </div>
         <div className="footer__bottom">
