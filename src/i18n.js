@@ -153,6 +153,9 @@ export const translations = {
         statusSending: 'Sending...',
         statusSent: 'Message Sent!',
         statusError: 'Failed — Try Again',
+        consentPre: 'I agree to the ',
+        consentLink: 'Privacy Policy',
+        consentPost: ' and consent to my data being processed to respond to my message.',
       },
     },
     footer: {
@@ -163,9 +166,103 @@ export const translations = {
       serviceLinks: ['Landing Pages', 'Multipage Websites', 'Target', 'Marketing', 'Graphic Design', 'Web Applications'],
       resources: 'Contact',
       resourceLinks: ['urmadigital@gmail.com', '+373 79 45 49 43', 'Chișinău, MD'],
-      copyright: '© 2026 OneCode. All rights reserved.',
+      copyright: '© 2026 Urma Digital. All rights reserved.',
       privacy: 'Privacy',
       terms: 'Terms',
+    },
+    privacyPage: {
+      back: 'Back',
+      label: 'Legal',
+      title: 'Privacy Policy',
+      updated: 'Last updated: June 25, 2026',
+      intro: 'Urma Digital ("we", "us") respects your privacy. This policy explains what personal data we collect through this website, why we collect it, and what rights you have.',
+      sections: [
+        {
+          heading: '1. Who we are',
+          body: 'Urma Digital is a web design & development studio. For any questions about this policy or your data, contact us at urmadigital@gmail.com.',
+        },
+        {
+          heading: '2. What data we collect',
+          body: 'When you submit our contact form, we collect: your name, email address, phone number, the service you\'re interested in, and the message you write. We do not collect any data automatically — only what you choose to submit.',
+        },
+        {
+          heading: '3. Why we collect it & legal basis',
+          body: 'We use this data solely to respond to your inquiry and discuss your project. The legal basis is your explicit consent, given via the checkbox on the contact form, and our legitimate interest in answering a request you initiated.',
+        },
+        {
+          heading: '4. How your data is processed',
+          body: 'Form submissions are sent via EmailJS, a third-party email delivery service that acts as our data processor, directly to our inbox. We do not store your data in a database, sell it, or use it for marketing without separate consent.',
+        },
+        {
+          heading: '5. Data retention',
+          body: 'We keep your message and contact details only for as long as needed to handle your inquiry and any resulting business relationship, after which it is deleted from our inbox upon request or after a reasonable period of inactivity.',
+        },
+        {
+          heading: '6. Cookies & local storage',
+          body: 'This website does not use analytics, advertising, or tracking cookies. We only use your browser\'s local storage to remember your language preference (EN/RO) — no personal data is stored this way, and it never leaves your device.',
+        },
+        {
+          heading: '7. Your rights',
+          body: 'Under GDPR, you have the right to access, rectify, or erase your data, restrict or object to its processing, request data portability, and withdraw your consent at any time. To exercise any of these rights, email urmadigital@gmail.com. You may also lodge a complaint with your local data protection authority.',
+        },
+        {
+          heading: '8. Security',
+          body: 'This site is served over HTTPS. We take reasonable measures to protect the data you submit, but no method of transmission over the internet is 100% secure.',
+        },
+        {
+          heading: '9. Changes to this policy',
+          body: 'We may update this policy occasionally to reflect changes in our practices. The "last updated" date above will always reflect the most recent revision.',
+        },
+      ],
+    },
+    termsPage: {
+      back: 'Back',
+      label: 'Legal',
+      title: 'Terms & Conditions',
+      updated: 'Last updated: June 25, 2026',
+      intro: 'These Terms & Conditions govern your use of this website and any services agreed upon with Urma Digital. By using this site or engaging our services, you agree to the terms below.',
+      sections: [
+        {
+          heading: '1. Services',
+          body: 'Urma Digital provides web design, web development, and digital marketing services. The exact scope, deliverables, timeline, and price for any project are agreed separately in writing (e.g. via email or a proposal) before work begins.',
+        },
+        {
+          heading: '2. Quotes & payment',
+          body: 'Quotes are valid for 30 days unless stated otherwise. Unless agreed differently, an upfront deposit may be required before work starts, with the remaining balance due upon completion or per agreed milestones.',
+        },
+        {
+          heading: '3. Revisions',
+          body: 'Each project includes a reasonable number of revision rounds as agreed at the start of the project. Additional revisions beyond the agreed scope may be billed separately.',
+        },
+        {
+          heading: '4. Intellectual property',
+          body: 'Upon full payment, ownership of the final delivered website/design transfers to the client. Urma Digital retains the right to showcase completed work in its own portfolio, unless otherwise agreed in writing.',
+        },
+        {
+          heading: '5. Third-party tools & content',
+          body: 'Some projects may rely on third-party platforms, plugins, fonts, or stock assets subject to their own licenses. The client is responsible for any ongoing subscription costs of third-party services used in their project after handover.',
+        },
+        {
+          heading: '6. Website content',
+          body: 'This website is provided for informational purposes about our services. While we strive for accuracy, we make no guarantees that all content is complete, current, or error-free.',
+        },
+        {
+          heading: '7. Limitation of liability',
+          body: 'Urma Digital is not liable for indirect, incidental, or consequential damages arising from the use of this website or of any delivered project, beyond the value of the fees paid for that project.',
+        },
+        {
+          heading: '8. Cancellation',
+          body: 'Either party may cancel an ongoing project with written notice. Work completed and deposits paid up to the cancellation date are non-refundable, except where otherwise agreed.',
+        },
+        {
+          heading: '9. Governing law',
+          body: 'These terms are governed by the laws of the Republic of Moldova. Any disputes will first be addressed through good-faith negotiation between the parties.',
+        },
+        {
+          heading: '10. Contact',
+          body: 'Questions about these terms can be sent to urmadigital@gmail.com.',
+        },
+      ],
     },
     caseStudy: {
       overview: 'Overview',
@@ -364,6 +461,9 @@ export const translations = {
         statusSending: 'Se trimite...',
         statusSent: 'Mesaj Trimis!',
         statusError: 'A eșuat — Reîncearcă',
+        consentPre: 'Sunt de acord cu ',
+        consentLink: 'Politica de Confidențialitate',
+        consentPost: ' și consimt ca datele mele să fie folosite pentru a-mi răspunde la mesaj.',
       },
     },
     footer: {
@@ -374,9 +474,103 @@ export const translations = {
       serviceLinks: ['Landing Pages', 'Site-uri Multipagină', 'Target', 'Marketing', 'Design Grafic', 'Aplicații Web'],
       resources: 'Contact',
       resourceLinks: ['urmadigital@gmail.com', '+373 79 45 49 43', 'Chișinău, MD'],
-      copyright: '© 2026 OneCode. Toate drepturile rezervate.',
+      copyright: '© 2026 Urma Digital. Toate drepturile rezervate.',
       privacy: 'Confidențialitate',
       terms: 'Termeni',
+    },
+    privacyPage: {
+      back: 'Înapoi',
+      label: 'Legal',
+      title: 'Politica de Confidențialitate',
+      updated: 'Ultima actualizare: 25 iunie 2026',
+      intro: 'Urma Digital ("noi") respectă confidențialitatea ta. Această politică explică ce date personale colectăm prin acest website, de ce le colectăm și ce drepturi ai.',
+      sections: [
+        {
+          heading: '1. Cine suntem',
+          body: 'Urma Digital este un studio de web design & dezvoltare. Pentru orice întrebare legată de această politică sau de datele tale, ne poți contacta la urmadigital@gmail.com.',
+        },
+        {
+          heading: '2. Ce date colectăm',
+          body: 'Când trimiți formularul de contact, colectăm: numele, adresa de email, numărul de telefon, serviciul de care ești interesat și mesajul scris de tine. Nu colectăm date automat — doar ce alegi tu să trimiți.',
+        },
+        {
+          heading: '3. De ce le colectăm & baza legală',
+          body: 'Folosim aceste date exclusiv pentru a-ți răspunde la solicitare și a discuta despre proiectul tău. Baza legală este consimțământul tău explicit, dat prin bifa din formularul de contact, precum și interesul nostru legitim de a răspunde la o cerere inițiată de tine.',
+        },
+        {
+          heading: '4. Cum sunt procesate datele tale',
+          body: 'Mesajele din formular sunt trimise prin EmailJS, un serviciu terț de livrare email care acționează ca procesator de date, direct către inboxul nostru. Nu stocăm datele tale într-o bază de date, nu le vindem și nu le folosim în scop de marketing fără un consimțământ separat.',
+        },
+        {
+          heading: '5. Perioada de păstrare',
+          body: 'Păstrăm mesajul și datele tale de contact doar atât timp cât este necesar pentru a gestiona solicitarea ta și o eventuală colaborare, după care sunt șterse din inbox la cerere sau după o perioadă rezonabilă de inactivitate.',
+        },
+        {
+          heading: '6. Cookie-uri & local storage',
+          body: 'Acest website nu folosește cookie-uri de analiză, publicitate sau tracking. Folosim doar local storage-ul browserului tău pentru a reține preferința de limbă (EN/RO) — nicio dată personală nu este stocată în acest fel și nu părăsește dispozitivul tău.',
+        },
+        {
+          heading: '7. Drepturile tale',
+          body: 'Conform GDPR, ai dreptul de a accesa, rectifica sau șterge datele tale, de a restricționa sau te opune procesării lor, de a solicita portabilitatea datelor și de a-ți retrage consimțământul în orice moment. Pentru a-ți exercita aceste drepturi, scrie-ne la urmadigital@gmail.com. Poți depune și o plângere la autoritatea locală de protecție a datelor.',
+        },
+        {
+          heading: '8. Securitate',
+          body: 'Acest site este servit prin HTTPS. Luăm măsuri rezonabile pentru a proteja datele pe care le trimiți, dar nicio metodă de transmisie pe internet nu este 100% sigură.',
+        },
+        {
+          heading: '9. Modificări ale acestei politici',
+          body: 'Putem actualiza ocazional această politică pentru a reflecta schimbări în practicile noastre. Data de "ultima actualizare" de mai sus va reflecta întotdeauna cea mai recentă revizuire.',
+        },
+      ],
+    },
+    termsPage: {
+      back: 'Înapoi',
+      label: 'Legal',
+      title: 'Termeni și Condiții',
+      updated: 'Ultima actualizare: 25 iunie 2026',
+      intro: 'Acești Termeni și Condiții reglementează utilizarea acestui website și a oricăror servicii convenite cu Urma Digital. Prin folosirea site-ului sau a serviciilor noastre, ești de acord cu termenii de mai jos.',
+      sections: [
+        {
+          heading: '1. Servicii',
+          body: 'Urma Digital oferă servicii de web design, dezvoltare web și marketing digital. Scopul exact, livrabilele, termenele și prețul fiecărui proiect se stabilesc separat, în scris (ex. email sau ofertă), înainte de începerea lucrului.',
+        },
+        {
+          heading: '2. Oferte & plată',
+          body: 'Ofertele sunt valabile 30 de zile, dacă nu se specifică altfel. Dacă nu se convine diferit, poate fi necesar un avans înainte de începerea lucrului, restul sumei fiind datorat la finalizare sau conform etapelor convenite.',
+        },
+        {
+          heading: '3. Revizuiri',
+          body: 'Fiecare proiect include un număr rezonabil de runde de revizuire, stabilit la începutul proiectului. Revizuirile suplimentare, peste scopul convenit, pot fi facturate separat.',
+        },
+        {
+          heading: '4. Proprietate intelectuală',
+          body: 'La plata integrală, dreptul de proprietate asupra website-ului/designului final livrat trece la client. Urma Digital își păstrează dreptul de a prezenta lucrarea finalizată în propriul portofoliu, dacă nu se convine altfel în scris.',
+        },
+        {
+          heading: '5. Instrumente & conținut terț',
+          body: 'Unele proiecte pot folosi platforme, plugin-uri, fonturi sau resurse grafice terțe, supuse propriilor licențe. Clientul este responsabil de costurile de abonament continue pentru serviciile terțe folosite în proiectul său, după predare.',
+        },
+        {
+          heading: '6. Conținutul website-ului',
+          body: 'Acest website este oferit cu scop informativ despre serviciile noastre. Deși ne dorim acuratețe, nu garantăm că tot conținutul este complet, actual sau fără erori.',
+        },
+        {
+          heading: '7. Limitarea responsabilității',
+          body: 'Urma Digital nu este responsabilă pentru daune indirecte, incidentale sau pe cale de consecință, rezultate din folosirea acestui website sau a unui proiect livrat, peste valoarea taxelor plătite pentru acel proiect.',
+        },
+        {
+          heading: '8. Anulare',
+          body: 'Oricare parte poate anula un proiect în curs printr-o notificare scrisă. Lucrul finalizat și avansurile plătite până la data anulării nu se rambursează, cu excepția cazurilor convenite altfel.',
+        },
+        {
+          heading: '9. Legea aplicabilă',
+          body: 'Acești termeni sunt guvernați de legile Republicii Moldova. Eventualele dispute vor fi abordate inițial prin negociere de bună-credință între părți.',
+        },
+        {
+          heading: '10. Contact',
+          body: 'Întrebări despre acești termeni pot fi trimise la urmadigital@gmail.com.',
+        },
+      ],
     },
     caseStudy: {
       overview: 'Prezentare',

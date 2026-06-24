@@ -352,6 +352,34 @@ function ProjectsPage({ onOpenCase, onBack, t, portfolio }) {
   );
 }
 
+function LegalPage({ onBack, page }) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const p = page;
+  return (
+    <div className="projects-page legal-page">
+      <div className="projects-page__head">
+        <button className="projects-page__back" onClick={onBack}>
+          <HiArrowLeft /> {p.back}
+        </button>
+        <p className="label">{p.label}</p>
+        <h1 className="heading-2">{p.title}</h1>
+        <p className="legal-page__updated">{p.updated}</p>
+        <p className="body-text body-text--lg projects-page__intro">{p.intro}</p>
+      </div>
+      <div className="legal-page__body">
+        {p.sections.map((s, i) => (
+          <div key={i} className="legal-page__section">
+            <h3>{s.heading}</h3>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -359,9 +387,13 @@ function App() {
   const [openFaq, setOpenFaq] = useState(null);
   const [activeCase, setActiveCase] = useState(null);
   const [formStatus, setFormStatus] = useState('idle'); // idle | sending | sent | error
-  const [route, setRoute] = useState(() =>
-    typeof window !== 'undefined' && window.location.hash === '#/projects' ? 'projects' : 'home'
-  );
+  const [route, setRoute] = useState(() => {
+    if (typeof window === 'undefined') return 'home';
+    if (window.location.hash === '#/projects') return 'projects';
+    if (window.location.hash === '#/privacy') return 'privacy';
+    if (window.location.hash === '#/terms') return 'terms';
+    return 'home';
+  });
   const [lang, setLang] = useState(() => {
     if (typeof window === 'undefined') return 'en';
     return localStorage.getItem('lang') || 'en';
@@ -387,7 +419,10 @@ function App() {
 
   useEffect(() => {
     const onHash = () => {
-      setRoute(window.location.hash === '#/projects' ? 'projects' : 'home');
+      if (window.location.hash === '#/projects') setRoute('projects');
+      else if (window.location.hash === '#/privacy') setRoute('privacy');
+      else if (window.location.hash === '#/terms') setRoute('terms');
+      else setRoute('home');
     };
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
@@ -396,6 +431,14 @@ function App() {
   const goToProjects = (e) => {
     if (e) e.preventDefault();
     window.location.hash = '#/projects';
+  };
+  const goToPrivacy = (e) => {
+    if (e) e.preventDefault();
+    window.location.hash = '#/privacy';
+  };
+  const goToTerms = (e) => {
+    if (e) e.preventDefault();
+    window.location.hash = '#/terms';
   };
   const goHome = (e) => {
     if (e) e.preventDefault();
@@ -487,6 +530,10 @@ function App() {
 
       {route === 'projects' ? (
         <ProjectsPage onOpenCase={setActiveCase} onBack={goHome} t={t} portfolio={portfolio} />
+      ) : route === 'privacy' ? (
+        <LegalPage onBack={goHome} page={t.privacyPage} />
+      ) : route === 'terms' ? (
+        <LegalPage onBack={goHome} page={t.termsPage} />
       ) : (
       <>
       {/* ─── HERO ─── */}
@@ -809,6 +856,14 @@ function App() {
               <label className="sr-only" htmlFor="message">{t.contact.form.message}</label>
               <textarea id="message" name="message" placeholder={t.contact.form.message} className="form-field form-textarea" rows="5" required />
               <input type="hidden" name="time" value={new Date().toLocaleString()} />
+              <label className="form-consent" htmlFor="consent">
+                <input id="consent" type="checkbox" name="consent" required />
+                <span>
+                  {t.contact.form.consentPre}
+                  <a href="#/privacy" onClick={goToPrivacy}>{t.contact.form.consentLink}</a>
+                  {t.contact.form.consentPost}
+                </span>
+              </label>
               <button type="submit" className={`btn btn--primary btn--full ${formStatus === 'sent' ? 'btn--success' : ''} ${formStatus === 'error' ? 'btn--error' : ''}`} disabled={formStatus === 'sending'}>
                 <span>
                   {formStatus === 'idle' && t.contact.form.statusIdle}
@@ -858,7 +913,7 @@ function App() {
         </div>
         <div className="footer__bottom">
           <p>{t.footer.copyright}</p>
-          <div className="footer__bottom-links"><a href="#!">{t.footer.privacy}</a><a href="#!">{t.footer.terms}</a></div>
+          <div className="footer__bottom-links"><a href="#/privacy" onClick={goToPrivacy}>{t.footer.privacy}</a><a href="#/terms" onClick={goToTerms}>{t.footer.terms}</a></div>
         </div>
       </footer>
 
