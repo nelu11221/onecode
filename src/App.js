@@ -456,7 +456,7 @@ function App() {
       {/* ─── NAVBAR ─── */}
       <nav className={`nav ${navScrolled ? 'nav--scrolled' : ''}`}>
         <div className="nav__inner">
-          <a href="#home" className="nav__logo"><img src={logoWhite} alt="OneCode" className="nav__logo-img" width="120" height="32" /></a>
+          <a href="#home" className="nav__logo"><img src={logoWhite} alt="Urma Digital" className="nav__logo-img" width="75" height="44" /></a>
           <ul className={`nav__links ${menuOpen ? 'open' : ''}`}>
             <li><a href="#home" onClick={() => setMenuOpen(false)}>{t.nav.home}</a></li>
             <li><a href="#work" onClick={() => setMenuOpen(false)}>{t.nav.work}</a></li>

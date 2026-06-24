@@ -222,7 +222,7 @@ button { font-family: var(--sans); }
   display: flex; align-items: center; justify-content: space-between;
 }
 .nav__logo { display: flex; align-items: center; }
-.nav__logo-img { height: 32px; width: auto; display: block; }
+.nav__logo-img { height: 44px; width: auto; display: block; }
 .nav__links { list-style: none; display: flex; gap: 36px; }
 .nav__links a {
   font-size: 0.88rem; font-weight: 500; color: var(--gray-300);
