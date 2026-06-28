@@ -465,7 +465,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormStatus('sending');
-    emailjs.sendForm('service_tjrtu2j', 'template_op0wa7q', formRef.current, 'dzh_MYVldtKHUDQQG')
+    emailjs.sendForm('service_yyi0eur', 'template_hdp3xeq', formRef.current, '2hxAxVwGi7lAkNK-b')
       .then(() => {
         setFormStatus('sent');
         formRef.current.reset();
