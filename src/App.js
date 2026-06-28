@@ -466,6 +466,7 @@ function App() {
     e.preventDefault();
     setFormStatus('sending');
     emailjs.sendForm('service_yyi0eur', 'template_hdp3xeq', formRef.current, '2hxAxVwGi7lAkNK-b')
+      .then(() => emailjs.sendForm('service_yyi0eur', 'template_wqq37pr', formRef.current, '2hxAxVwGi7lAkNK-b'))
       .then(() => {
         setFormStatus('sent');
         formRef.current.reset();
