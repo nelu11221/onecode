@@ -57,7 +57,7 @@ export const translations = {
       headingPre: 'We design with purpose and build with',
       headingEm: 'precision',
       body:
-        'OneCode is a web design and development studio that helps businesses stand out online. From single landing pages to full multipage websites, we combine clean UI/UX design with solid development to deliver digital products that look great and perform even better.',
+        'Urma Digital is a web design and development studio that helps businesses stand out online. From single landing pages to full multipage websites, we combine clean UI/UX design with solid development to deliver digital products that look great and perform even better.',
       features: [
         'Pixel-perfect design',
         'Mobile-first development',
@@ -112,9 +112,9 @@ export const translations = {
       headingEm: 'clients',
       headingSuffix: 'say',
       items: [
-        { name: 'Sarah Johnson', role: 'Founder, Luxe Realty', text: 'OneCode built us a landing page that doubled our lead conversion overnight. The design is sleek, fast, and exactly what we envisioned.' },
+        { name: 'Sarah Johnson', role: 'Founder, Luxe Realty', text: 'Urma Digital built us a landing page that doubled our lead conversion overnight. The design is sleek, fast, and exactly what we envisioned.' },
         { name: 'David Chen', role: 'Creative Director, Moda Studio', text: "They designed a portfolio site that actually feels like art. Every detail was considered — it's the best investment we've made." },
-        { name: 'Emily Rodriguez', role: 'CEO, NovaBrew', text: 'From the brand identity to the full website, OneCode delivered a cohesive digital presence that elevated our entire business.' },
+        { name: 'Emily Rodriguez', role: 'CEO, NovaBrew', text: 'From the brand identity to the full website, Urma Digital delivered a cohesive digital presence that elevated our entire business.' },
       ],
     },
     faq: {
@@ -134,7 +134,7 @@ export const translations = {
     team: {
       label: 'The Team',
       headingPre: 'The people behind',
-      headingEm: 'OneCode',
+      headingEm: 'Urma Digital',
       roles: ['Web Developer & Graphic Designer', 'Targeting & Marketing Specialist'],
     },
     contact: {
@@ -365,7 +365,7 @@ export const translations = {
       headingPre: 'Proiectăm cu intenție și construim cu',
       headingEm: 'precizie',
       body:
-        'OneCode este un studio de web design și dezvoltare care ajută companiile să iasă în evidență online. De la simple landing pages la site-uri multipagină complete, combinăm design UI/UX curat cu dezvoltare solidă pentru a livra produse digitale care arată bine și performează și mai bine.',
+        'Urma Digital este un studio de web design și dezvoltare care ajută companiile să iasă în evidență online. De la simple landing pages la site-uri multipagină complete, combinăm design UI/UX curat cu dezvoltare solidă pentru a livra produse digitale care arată bine și performează și mai bine.',
       features: [
         'Design la nivel de pixel',
         'Dezvoltare mobile-first',
@@ -420,9 +420,9 @@ export const translations = {
       headingEm: 'clienții',
       headingSuffix: 'noștri',
       items: [
-        { name: 'Sarah Johnson', role: 'Fondator, Luxe Realty', text: 'OneCode ne-a construit un landing page care ne-a dublat conversia peste noapte. Designul e elegant, rapid și exact ce ne-am imaginat.' },
+        { name: 'Sarah Johnson', role: 'Fondator, Luxe Realty', text: 'Urma Digital ne-a construit un landing page care ne-a dublat conversia peste noapte. Designul e elegant, rapid și exact ce ne-am imaginat.' },
         { name: 'David Chen', role: 'Director Creativ, Moda Studio', text: 'Au creat un site portofoliu care chiar se simte ca o operă de artă. Fiecare detaliu a fost gândit — e cea mai bună investiție pe care am făcut-o.' },
-        { name: 'Emily Rodriguez', role: 'CEO, NovaBrew', text: 'De la identitatea de brand la site-ul complet, OneCode a livrat o prezență digitală coerentă care a ridicat tot business-ul.' },
+        { name: 'Emily Rodriguez', role: 'CEO, NovaBrew', text: 'De la identitatea de brand la site-ul complet, Urma Digital a livrat o prezență digitală coerentă care a ridicat tot business-ul.' },
       ],
     },
     faq: {
@@ -442,7 +442,7 @@ export const translations = {
     team: {
       label: 'Echipa',
       headingPre: 'Oamenii din spatele',
-      headingEm: 'OneCode',
+      headingEm: 'Urma Digital',
       roles: ['Web Developer & Designer Grafic', 'Specialist Targeting & Marketing'],
     },
     contact: {

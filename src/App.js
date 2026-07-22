@@ -539,6 +539,8 @@ function App() {
       <>
       {/* ─── HERO ─── */}
       <section className="hero" id="home">
+        {/* Orange glow behind mascot (desktop) */}
+        <div className="hero__glow" aria-hidden="true" />
         {/* Animated floating gradient blobs */}
         <div className="hero__blob hero__blob--1" />
         <div className="hero__blob hero__blob--2" />
@@ -551,12 +553,14 @@ function App() {
         <ParallaxLayer speed={-0.15} className="hero__content-wrap">
           <div className="hero__content">
             <p className="hero__tag anim-hero anim-hero--1">{t.hero.tag}</p>
-            <h1 className="hero__title anim-hero anim-hero--2">
-              {t.hero.title1}{' '}
-              <em className="hero__italic">{t.hero.titleItalic}</em>{' '}
-              {t.hero.title2}
-            </h1>
-            <p className="hero__sub anim-hero anim-hero--3">{t.hero.subtitle}</p>
+            <div className="hero__headline">
+              <h1 className="hero__title anim-hero anim-hero--2">
+                {t.hero.title1}{' '}
+                <em className="hero__italic">{t.hero.titleItalic}</em>{' '}
+                {t.hero.title2}
+              </h1>
+              <p className="hero__sub anim-hero anim-hero--3">{t.hero.subtitle}</p>
+            </div>
             <div className="hero__actions anim-hero anim-hero--4">
               <a href="#work" className="btn btn--primary">
                 <span className="btn__label-desktop">{t.hero.primaryDesktop}</span>
@@ -567,6 +571,13 @@ function App() {
             </div>
           </div>
         </ParallaxLayer>
+
+        <div className="hero__mascot" aria-hidden="true">
+          <picture>
+            <source srcSet={`${PU}/maskot1.webp`} type="image/webp" />
+            <img src={`${PU}/maskot1-cut.png`} alt="" width="860" height="1290" loading="eager" decoding="async" />
+          </picture>
+        </div>
 
         <div className="hero__bottom-block hero__mobile-only anim-hero anim-hero--5">
           <p className="hero__bottom-sub">{t.hero.subtitle}</p>
@@ -747,6 +758,12 @@ function App() {
             </Reveal>
           </div>
         </div>
+        <div className="process-mascot" aria-hidden="true">
+          <picture>
+            <source srcSet={`${PU}/maskot3.webp`} type="image/webp" />
+            <img src={`${PU}/maskot3-cut.png`} alt="" width="620" height="1296" loading="lazy" decoding="async" />
+          </picture>
+        </div>
       </section>
 
       {/* ─── SERVICES ─── */}
@@ -885,7 +902,7 @@ function App() {
       <footer className="footer">
         <div className="footer__top">
           <div className="footer__brand">
-            <a href="#home" className="nav__logo"><img src={logoWhite} alt="OneCode" className="nav__logo-img" loading="lazy" decoding="async" /></a>
+            <a href="#home" className="nav__logo"><img src={logoWhite} alt="Urma Digital" className="nav__logo-img" loading="lazy" decoding="async" /></a>
             <p className="footer__tagline">{t.footer.tagline}</p>
             <div className="footer__socials">
               <a href="#!" aria-label="LinkedIn"><FiLinkedin /></a>
